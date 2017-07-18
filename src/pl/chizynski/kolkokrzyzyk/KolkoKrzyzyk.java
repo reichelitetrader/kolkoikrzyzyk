@@ -202,7 +202,13 @@ public class KolkoKrzyzyk {
     public static boolean sprawdz_wygrana_w_kolumnie(char znak, int kolumna) {
         return plansza[kolumna][0] == znak && plansza[kolumna][1] == znak && plansza[kolumna][2] == znak;
     }
-
+    
+    /**
+     * sprawdzanie wygranej w wierszu
+     * @param znak wybor czy jest kolko czy krzyzyk
+     * @param wiersz numer wiersza w ktorym nastapila wygrana
+     * @return jesli wygrywa kolko/krzyzyk zwraca true jesli nie wygrywa false
+     */
     public static boolean sprawdz_wygrana_w_wierszu(char znak, int wiersz) {
         return plansza[0][wiersz] == znak && plansza[1][wiersz] == znak && plansza[2][wiersz] == znak;
     }
