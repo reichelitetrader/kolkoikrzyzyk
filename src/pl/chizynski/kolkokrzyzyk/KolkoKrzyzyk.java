@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class KolkoKrzyzyk {
 
     static char[][] plansza = new char[3][3];
+
     static char puste = ' ';
     static char kolko = 'O';
     static char krzyzyk = 'X';
@@ -18,7 +19,6 @@ public class KolkoKrzyzyk {
         boolean value = true;
         boolean endofgame = false;
 
-        ustawianie_stanu_poczatkowego();
         wyswietl_stan();
         System.out.println("wybierz kto zaczyna?:");
         wynik = wybierz_znak();
@@ -26,14 +26,29 @@ public class KolkoKrzyzyk {
         String wybor = "";
         System.out.println("wybor gracza, z kim chcesz zagrac? [K / C]:");
         wybor = scanner.nextLine();
+
         if (wybor.equals("K")) {
             System.out.println("rozpoczynasz nowa  gre z Computer:");
 
         } else if (wybor.equals("C")) {
             System.out.println("rozpoczynasz nowa gre z graczem:");
         }
+        String wybor_planszy = "";
+        System.out.println("Wybierz wielkosc planszy M [3x3]  D [5x5]:");
+        wybor_planszy = scanner.nextLine();
 
+        if (wybor_planszy.equals("M")) {
+            System.out.println("wybrales plansze mala 3x3:");
+        } else if (wybor_planszy.equals("D")) {
+            System.out.println("wybrales plansze duza 5x5:");
+            plansza = new char[5][5];
+
+        }
+
+        ustawianie_stanu_poczatkowego();
         while (true) {
+            System.out.println("kolejna tura:");
+            wyswietl_stan();
 
             if (sprawdz_wygrana(krzyzyk)) {
                 endofgame = true;
@@ -67,8 +82,8 @@ public class KolkoKrzyzyk {
 
             if (wybor.equals("K") && numerRuchu % 2 != 0) {
                 while (true) {
-                    int x = (int) Math.floor(Math.random() * 3);
-                    int y = (int) Math.floor(Math.random() * 3);
+                    int x = (int) Math.floor(Math.random() * 5);
+                    int y = (int) Math.floor(Math.random() * 5);
                     if (puste == plansza[x][y]) {
                         if (numerRuchu % 2 != 0) {
                             plansza[x][y] = wynik;
@@ -89,7 +104,6 @@ public class KolkoKrzyzyk {
                 value = pobierz_wartosc();
             }
 
-            wyswietl_stan();
             if (value == true) {
                 numerRuchu++;
             } else {
@@ -173,10 +187,10 @@ public class KolkoKrzyzyk {
     }
 
     public static boolean sprawdz_wygrana(char znak) {
-        if (sprawdz_wygrana_w_kolumnie(znak, 0) || sprawdz_wygrana_w_kolumnie(znak, 1) || sprawdz_wygrana_w_kolumnie(znak, 2)) {
+        if (sprawdz_wygrana_w_kolumnie(znak, 0) || sprawdz_wygrana_w_kolumnie(znak, 1) || sprawdz_wygrana_w_kolumnie(znak, 2) || sprawdz_wygrana_w_kolumnie(znak, 3) || sprawdz_wygrana_w_kolumnie(znak, 4)) {
             return true;
         }
-        if (sprawdz_wygrana_w_wierszu(znak, 0) || sprawdz_wygrana_w_wierszu(znak, 1) || sprawdz_wygrana_w_wierszu(znak, 2)) {
+        if (sprawdz_wygrana_w_wierszu(znak, 0) || sprawdz_wygrana_w_wierszu(znak, 1) || sprawdz_wygrana_w_wierszu(znak, 2) || sprawdz_wygrana_w_wierszu(znak, 3) || sprawdz_wygrana_w_wierszu(znak, 4)) {
             return true;
         }
         if (sprawdz_wygrana_na_skos(znak)) {
@@ -200,25 +214,26 @@ public class KolkoKrzyzyk {
     }
 
     public static boolean sprawdz_wygrana_w_kolumnie(char znak, int kolumna) {
-        return plansza[kolumna][0] == znak && plansza[kolumna][1] == znak && plansza[kolumna][2] == znak;
+        return plansza[kolumna][0] == znak && plansza[kolumna][1] == znak && plansza[kolumna][2] == znak && plansza[kolumna][3] == znak && plansza[kolumna][4] == znak;
     }
-    
+
     /**
      * sprawdzanie wygranej w wierszu
+     *
      * @param znak wybor czy jest kolko czy krzyzyk
      * @param wiersz numer wiersza w ktorym nastapila wygrana
      * @return jesli wygrywa kolko/krzyzyk zwraca true jesli nie wygrywa false
      */
     public static boolean sprawdz_wygrana_w_wierszu(char znak, int wiersz) {
-        return plansza[0][wiersz] == znak && plansza[1][wiersz] == znak && plansza[2][wiersz] == znak;
+        return plansza[0][wiersz] == znak && plansza[1][wiersz] == znak && plansza[2][wiersz] == znak && plansza[3][wiersz] == znak && plansza[4][wiersz] == znak;
     }
 
     public static boolean sprawdz_wygrana_na_skos(char znak) {
-        return (plansza[0][0] == znak && plansza[1][1] == znak && plansza[2][2] == znak)
-                || (plansza[2][0] == znak && plansza[1][1] == znak && plansza[0][2] == znak);
+        return (plansza[0][0] == znak && plansza[1][1] == znak && plansza[2][2] == znak && plansza [3][3] == znak && plansza[4][4] == znak)
+                ||( plansza[0][4] == znak && plansza[1][3] == znak && plansza[2][2] == znak && plansza[3][1] == znak && plansza[0][4]== znak);
     }
 
     public static boolean sprawdz_remis() {
-        return numerRuchu == 10 && !sprawdz_wygrana(kolko) && !sprawdz_wygrana(krzyzyk);
+        return numerRuchu == 26 && !sprawdz_wygrana(kolko) && !sprawdz_wygrana(krzyzyk);
     }
 }
