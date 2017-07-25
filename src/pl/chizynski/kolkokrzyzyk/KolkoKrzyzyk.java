@@ -82,8 +82,8 @@ public class KolkoKrzyzyk {
 
             if (wybor.equals("K") && numerRuchu % 2 != 0) {
                 while (true) {
-                    int x = (int) Math.floor(Math.random() * 5);
-                    int y = (int) Math.floor(Math.random() * 5);
+                    int x = (int) Math.floor(Math.random() * plansza.length);
+                    int y = (int) Math.floor(Math.random() * plansza.length);
                     if (puste == plansza[x][y]) {
                         if (numerRuchu % 2 != 0) {
                             plansza[x][y] = wynik;
@@ -187,12 +187,18 @@ public class KolkoKrzyzyk {
     }
 
     public static boolean sprawdz_wygrana(char znak) {
-        if (sprawdz_wygrana_w_kolumnie(znak, 0) || sprawdz_wygrana_w_kolumnie(znak, 1) || sprawdz_wygrana_w_kolumnie(znak, 2) || sprawdz_wygrana_w_kolumnie(znak, 3) || sprawdz_wygrana_w_kolumnie(znak, 4)) {
-            return true;
+        for (int i = 0; i < plansza.length; i++) {
+            if (sprawdz_wygrana_w_kolumnie(znak, i)) {
+                return true;
+            }
+
         }
-        if (sprawdz_wygrana_w_wierszu(znak, 0) || sprawdz_wygrana_w_wierszu(znak, 1) || sprawdz_wygrana_w_wierszu(znak, 2) || sprawdz_wygrana_w_wierszu(znak, 3) || sprawdz_wygrana_w_wierszu(znak, 4)) {
-            return true;
+        for (int i = 0; i < plansza.length; i++) {
+            if (sprawdz_wygrana_w_wierszu(znak, i)) {
+                return true;
+            }
         }
+
         if (sprawdz_wygrana_na_skos(znak)) {
             return true;
         }
@@ -214,7 +220,13 @@ public class KolkoKrzyzyk {
     }
 
     public static boolean sprawdz_wygrana_w_kolumnie(char znak, int kolumna) {
-        return plansza[kolumna][0] == znak && plansza[kolumna][1] == znak && plansza[kolumna][2] == znak && plansza[kolumna][3] == znak && plansza[kolumna][4] == znak;
+        boolean result = true;
+        for (int i = 0; i < plansza[kolumna].length; i++) {
+            if (plansza[kolumna][i] != znak) {
+                result = false;
+            }
+        }
+        return result;
     }
 
     /**
@@ -225,12 +237,40 @@ public class KolkoKrzyzyk {
      * @return jesli wygrywa kolko/krzyzyk zwraca true jesli nie wygrywa false
      */
     public static boolean sprawdz_wygrana_w_wierszu(char znak, int wiersz) {
-        return plansza[0][wiersz] == znak && plansza[1][wiersz] == znak && plansza[2][wiersz] == znak && plansza[3][wiersz] == znak && plansza[4][wiersz] == znak;
+        boolean result = true;
+        for (int i = 0; i < plansza[wiersz].length; i++) {
+            if (plansza[wiersz][i] != znak) {
+                result = false;
+            }
+        }
+        return result;
     }
 
     public static boolean sprawdz_wygrana_na_skos(char znak) {
-        return (plansza[0][0] == znak && plansza[1][1] == znak && plansza[2][2] == znak && plansza [3][3] == znak && plansza[4][4] == znak)
-                ||( plansza[0][4] == znak && plansza[1][3] == znak && plansza[2][2] == znak && plansza[3][1] == znak && plansza[0][4]== znak);
+        return sprawdz_wygrana_na_skos_1(znak) || sprawdz_wygrana_na_skos_2(znak);
+    }
+
+    public static boolean sprawdz_wygrana_na_skos_1(char znak) {
+        boolean result = true;
+        for (int i = 0; i < plansza.length; i++) {
+            if (plansza[i][i] != znak) {
+                result = false;
+            }
+
+        }
+        return result;
+    }
+
+    public static boolean sprawdz_wygrana_na_skos_2(char znak) {
+        boolean result = true;
+        for (int i = 0; i < plansza.length; i++) {
+            for (int j = plansza.length-1; j >= 0; j--) {
+                if (plansza[i][j] != znak) {
+                    result = false;
+                }
+            }
+        }
+        return result;
     }
 
     public static boolean sprawdz_remis() {
