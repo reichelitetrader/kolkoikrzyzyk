@@ -34,7 +34,7 @@ public class KolkoKrzyzyk {
             System.out.println("rozpoczynasz nowa gre z graczem:");
         }
         String wybor_planszy = "";
-        System.out.println("Wybierz wielkosc planszy M [3x3]  D [5x5]:");
+        System.out.println("Wybierz wielkosc planszy M [3x3]  D [5x5] BD [7x7]:");
         wybor_planszy = scanner.nextLine();
 
         if (wybor_planszy.equals("M")) {
@@ -43,6 +43,9 @@ public class KolkoKrzyzyk {
             System.out.println("wybrales plansze duza 5x5:");
             plansza = new char[5][5];
 
+        } else if (wybor_planszy.equals("BD")) {
+            System.out.println("wybrales plansze duza 7x7:");
+            plansza = new char[7][7];
         }
 
         ustawianie_stanu_poczatkowego();
@@ -263,17 +266,25 @@ public class KolkoKrzyzyk {
 
     public static boolean sprawdz_wygrana_na_skos_2(char znak) {
         boolean result = true;
-        for (int i = 0; i < plansza.length; i++) {
-            for (int j = plansza.length-1; j >= 0; j--) {
-                if (plansza[i][j] != znak) {
-                    result = false;
-                }
+        for (int i = 0, j = plansza.length - 1; i < plansza.length; i++, j--) {
+            if (plansza[i][j] != znak) {
+                result = false;
             }
+
         }
         return result;
     }
 
     public static boolean sprawdz_remis() {
-        return numerRuchu == 26 && !sprawdz_wygrana(kolko) && !sprawdz_wygrana(krzyzyk);
+
+        if (plansza.length == 3) {
+            return numerRuchu == 10 && !sprawdz_wygrana(kolko) && !sprawdz_wygrana(krzyzyk);
+        } else if (plansza.length == 5) {
+            return numerRuchu == 26 && !sprawdz_wygrana(kolko) && !sprawdz_wygrana(krzyzyk);
+        } else {
+            return numerRuchu == 50 && !sprawdz_wygrana(kolko) && !sprawdz_wygrana(krzyzyk);
+        }
+
+// return numerRuchu == 50  numerRuchu == 10 && numerRuchu == 26 && !sprawdz_wygrana(kolko) && !sprawdz_wygrana(krzyzyk);
     }
 }
