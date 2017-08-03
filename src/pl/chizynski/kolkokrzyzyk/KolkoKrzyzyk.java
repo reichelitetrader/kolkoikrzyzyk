@@ -6,7 +6,6 @@ import java.util.Scanner;
 public class KolkoKrzyzyk {
 
     static char[][] plansza = new char[3][3];
-
     static char puste = ' ';
     static char kolko = 'O';
     static char krzyzyk = 'X';
@@ -96,17 +95,13 @@ public class KolkoKrzyzyk {
                             } else if (wynik == krzyzyk) {
                                 plansza[x][y] = kolko;
                             }
-
                         }
                         break;
                     }
-
                 }
-
             } else {
                 value = pobierz_wartosc();
             }
-
             if (value == true) {
                 numerRuchu++;
             } else {
@@ -224,8 +219,10 @@ public class KolkoKrzyzyk {
 
     public static boolean sprawdz_wygrana_w_kolumnie(char znak, int kolumna) {
         boolean result = true;
+        
         for (int i = 0; i < plansza[kolumna].length; i++) {
-            if (plansza[kolumna][i] != znak) {
+           // System.out.println("["+kolumna+"]["+i+"]"); 
+                    if (plansza[kolumna][i] != znak) {
                 result = false;
             }
         }
@@ -233,8 +230,6 @@ public class KolkoKrzyzyk {
     }
 
     /**
-     * sprawdzanie wygranej w wierszu
-     *
      * @param znak wybor czy jest kolko czy krzyzyk
      * @param wiersz numer wiersza w ktorym nastapila wygrana
      * @return jesli wygrywa kolko/krzyzyk zwraca true jesli nie wygrywa false
@@ -242,7 +237,8 @@ public class KolkoKrzyzyk {
     public static boolean sprawdz_wygrana_w_wierszu(char znak, int wiersz) {
         boolean result = true;
         for (int i = 0; i < plansza[wiersz].length; i++) {
-            if (plansza[wiersz][i] != znak) {
+           // System.out.println("["+wiersz+"]["+i+"]"); 
+            if (plansza[i][wiersz] != znak) {
                 result = false;
             }
         }
@@ -270,21 +266,18 @@ public class KolkoKrzyzyk {
             if (plansza[i][j] != znak) {
                 result = false;
             }
-
         }
         return result;
     }
 
+    public static double pobierz_max_ilosc_ruchow() {
+
+        return Math.pow(plansza.length, 2) + 1;
+    }
+
     public static boolean sprawdz_remis() {
 
-        if (plansza.length == 3) {
-            return numerRuchu == 10 && !sprawdz_wygrana(kolko) && !sprawdz_wygrana(krzyzyk);
-        } else if (plansza.length == 5) {
-            return numerRuchu == 26 && !sprawdz_wygrana(kolko) && !sprawdz_wygrana(krzyzyk);
-        } else {
-            return numerRuchu == 50 && !sprawdz_wygrana(kolko) && !sprawdz_wygrana(krzyzyk);
-        }
+        return numerRuchu == pobierz_max_ilosc_ruchow() && !sprawdz_wygrana(kolko) && !sprawdz_wygrana(krzyzyk);
 
-// return numerRuchu == 50  numerRuchu == 10 && numerRuchu == 26 && !sprawdz_wygrana(kolko) && !sprawdz_wygrana(krzyzyk);
     }
 }
