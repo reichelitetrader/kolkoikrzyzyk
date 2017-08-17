@@ -2,13 +2,17 @@
 package pl.chizynski.kolkokrzyzyk;
 
 import java.util.Scanner;
+import pl.chizynski.kolkokrzyzyk.figures.Figure;
+import pl.chizynski.kolkokrzyzyk.figures.Kolko;
+import pl.chizynski.kolkokrzyzyk.figures.Krzyzyk;
 
 public class KolkoKrzyzyk {
 
-    static char[][] plansza = new char[3][3];
-    static char puste = ' ';
-    static char kolko = 'O';
-    static char krzyzyk = 'X';
+    static Figure kolko = new Kolko();
+    static Figure krzyzyk = new Krzyzyk();
+    static Figure puste = new Figure();
+    static Figure[][] plansza = new Figure[3][3];
+
     static int numerRuchu = 1;
     static char wynik = 0;
 
@@ -18,6 +22,7 @@ public class KolkoKrzyzyk {
         boolean value = true;
         boolean endofgame = false;
 
+        ustawianie_stanu_poczatkowego();
         wyswietl_stan();
         System.out.println("wybierz kto zaczyna?:");
         wynik = wybierz_znak();
@@ -40,23 +45,22 @@ public class KolkoKrzyzyk {
             System.out.println("wybrales plansze mala 3x3:");
         } else if (wybor_planszy.equals("D")) {
             System.out.println("wybrales plansze duza 5x5:");
-            plansza = new char[5][5];
+            plansza = new Figure[5][5];
 
         } else if (wybor_planszy.equals("BD")) {
             System.out.println("wybrales plansze duza 7x7:");
-            plansza = new char[7][7];
+            plansza = new Figure[7][7];
         }
 
-        ustawianie_stanu_poczatkowego();
         while (true) {
             System.out.println("kolejna tura:");
             wyswietl_stan();
 
-            if (sprawdz_wygrana(krzyzyk)) {
+            if (sprawdz_wygrana(krzyzyk.getSymbol())) {
                 endofgame = true;
                 System.out.println("wygrywa X:");
             }
-            if (sprawdz_wygrana(kolko)) {
+            if (sprawdz_wygrana(kolko.getSymbol())) {
                 endofgame = true;
                 System.out.println("wygrywa O:");
 
@@ -88,11 +92,16 @@ public class KolkoKrzyzyk {
                     int y = (int) Math.floor(Math.random() * plansza.length);
                     if (puste == plansza[x][y]) {
                         if (numerRuchu % 2 != 0) {
-                            plansza[x][y] = wynik;
+                            if (krzyzyk.getSymbol() == wynik) {
+                                plansza[x][y] = new Krzyzyk();
+                            } else {
+                                plansza[x][y] = new Kolko();
+                            }
+
                         } else if (numerRuchu % 2 == 0) {
-                            if (wynik == kolko) {
+                            if (wynik == kolko.getSymbol()) {
                                 plansza[x][y] = krzyzyk;
-                            } else if (wynik == krzyzyk) {
+                            } else if (wynik == krzyzyk.getSymbol()) {
                                 plansza[x][y] = kolko;
                             }
                         }
@@ -125,7 +134,7 @@ public class KolkoKrzyzyk {
         for (int i = 0; i < plansza.length; i++) {
             System.out.print("|");
             for (int j = 0; j < plansza[i].length; j++) {
-                System.out.print(plansza[i][j] + "|");
+                System.out.print(plansza[i][j].getSymbol() + "|");
             }
             System.out.println("");
         }
@@ -164,11 +173,15 @@ public class KolkoKrzyzyk {
             if (puste == plansza[wiersz][kolumna]) {
 
                 if (numerRuchu % 2 != 0) {
-                    plansza[wiersz][kolumna] = wynik;
+                    if (kolko.getSymbol() == wynik) {
+                        plansza[wiersz][kolumna] = new Kolko();
+                    } else {
+                        plansza[wiersz][kolumna] = new Krzyzyk();
+                    }
                 } else if (numerRuchu % 2 == 0) {
-                    if (wynik == kolko) {
+                    if (wynik == kolko.getSymbol()) {
                         plansza[wiersz][kolumna] = krzyzyk;
-                    } else if (wynik == krzyzyk) {
+                    } else if (wynik == krzyzyk.getSymbol()) {
                         plansza[wiersz][kolumna] = kolko;
                     }
                 }
@@ -214,15 +227,16 @@ public class KolkoKrzyzyk {
             System.out.println("zaczyna krzyzyk:");
             return wybor.charAt(0);
         }
-        return puste;
+        return wynik;
     }
 
     public static boolean sprawdz_wygrana_w_kolumnie(char znak, int kolumna) {
         boolean result = true;
-        
+
         for (int i = 0; i < plansza[kolumna].length; i++) {
-           // System.out.println("["+kolumna+"]["+i+"]"); 
-                    if (plansza[kolumna][i] != znak) {
+            // System.out.println("["+kolumna+"]["+i+"]"); 
+            if (plansza[kolumna][i].getSymbol() != znak) {
+
                 result = false;
             }
         }
@@ -237,8 +251,8 @@ public class KolkoKrzyzyk {
     public static boolean sprawdz_wygrana_w_wierszu(char znak, int wiersz) {
         boolean result = true;
         for (int i = 0; i < plansza[wiersz].length; i++) {
-           // System.out.println("["+wiersz+"]["+i+"]"); 
-            if (plansza[i][wiersz] != znak) {
+            // System.out.println("["+wiersz+"]["+i+"]"); 
+            if (plansza[i][wiersz].getSymbol() != znak) {
                 result = false;
             }
         }
@@ -252,7 +266,7 @@ public class KolkoKrzyzyk {
     public static boolean sprawdz_wygrana_na_skos_1(char znak) {
         boolean result = true;
         for (int i = 0; i < plansza.length; i++) {
-            if (plansza[i][i] != znak) {
+            if (plansza[i][i].getSymbol() != znak) {
                 result = false;
             }
 
@@ -263,12 +277,13 @@ public class KolkoKrzyzyk {
     public static boolean sprawdz_wygrana_na_skos_2(char znak) {
         boolean result = true;
         for (int i = 0, j = plansza.length - 1; i < plansza.length; i++, j--) {
-            if (plansza[i][j] != znak) {
+            if (plansza[i][j].getSymbol() != znak) {
                 result = false;
             }
         }
         return result;
     }
+    
 
     public static double pobierz_max_ilosc_ruchow() {
 
@@ -277,7 +292,7 @@ public class KolkoKrzyzyk {
 
     public static boolean sprawdz_remis() {
 
-        return numerRuchu == pobierz_max_ilosc_ruchow() && !sprawdz_wygrana(kolko) && !sprawdz_wygrana(krzyzyk);
+        return numerRuchu == pobierz_max_ilosc_ruchow() && !sprawdz_wygrana(kolko.getSymbol()) && !sprawdz_wygrana(krzyzyk.getSymbol());
 
     }
 }
