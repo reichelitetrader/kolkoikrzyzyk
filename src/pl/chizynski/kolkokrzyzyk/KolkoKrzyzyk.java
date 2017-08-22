@@ -2,6 +2,7 @@
 package pl.chizynski.kolkokrzyzyk;
 
 import java.util.Scanner;
+import pl.chizynski.kolkokrzyzyk.boards.Board;
 import pl.chizynski.kolkokrzyzyk.figures.Figure;
 import pl.chizynski.kolkokrzyzyk.figures.Kolko;
 import pl.chizynski.kolkokrzyzyk.figures.Krzyzyk;
@@ -11,7 +12,7 @@ public class KolkoKrzyzyk {
     static Figure kolko = new Kolko();
     static Figure krzyzyk = new Krzyzyk();
     static Figure puste = new Figure();
-    static Figure[][] plansza = new Figure[3][3];
+    static Board board = new Board(3); 
 
     static int numerRuchu = 1;
     static char wynik = 0;
@@ -45,11 +46,11 @@ public class KolkoKrzyzyk {
             System.out.println("wybrales plansze mala 3x3:");
         } else if (wybor_planszy.equals("D")) {
             System.out.println("wybrales plansze duza 5x5:");
-            plansza = new Figure[5][5];
+            board = new Board(5);
 
         } else if (wybor_planszy.equals("BD")) {
             System.out.println("wybrales plansze duza 7x7:");
-            plansza = new Figure[7][7];
+            board = new Board(7); 
         }
 
         while (true) {
@@ -88,21 +89,21 @@ public class KolkoKrzyzyk {
 
             if (wybor.equals("K") && numerRuchu % 2 != 0) {
                 while (true) {
-                    int x = (int) Math.floor(Math.random() * plansza.length);
-                    int y = (int) Math.floor(Math.random() * plansza.length);
-                    if (puste == plansza[x][y]) {
+                    int x = (int) Math.floor(Math.random() * board.fields.length );
+                    int y = (int) Math.floor(Math.random() * board.fields.length);
+                    if (puste == board.fields[x][y]) {
                         if (numerRuchu % 2 != 0) {
                             if (krzyzyk.getSymbol() == wynik) {
-                                plansza[x][y] = new Krzyzyk();
+                                board.fields[x][y] = new Krzyzyk();
                             } else {
-                                plansza[x][y] = new Kolko();
+                                board.fields[x][y] = new Kolko();
                             }
 
                         } else if (numerRuchu % 2 == 0) {
                             if (wynik == kolko.getSymbol()) {
-                                plansza[x][y] = krzyzyk;
+                                board.fields[x][y] = krzyzyk;
                             } else if (wynik == krzyzyk.getSymbol()) {
-                                plansza[x][y] = kolko;
+                                board.fields[x][y] = kolko;
                             }
                         }
                         break;
@@ -121,9 +122,9 @@ public class KolkoKrzyzyk {
     }
 
     public static void ustawianie_stanu_poczatkowego() {
-        for (int i = 0; i < plansza.length; i++) {
-            for (int j = 0; j < plansza[i].length; j++) {
-                plansza[i][j] = puste;
+        for (int i = 0; i < board.fields.length; i++) {
+            for (int j = 0; j < board.fields[i].length; j++) {
+                board.fields[i][j] = puste;
             }
         }
     }
@@ -131,10 +132,10 @@ public class KolkoKrzyzyk {
     public static void wyswietl_stan() {
         System.out.println("ponizej stan planszy:");
 
-        for (int i = 0; i < plansza.length; i++) {
+        for (int i = 0; i < board.fields.length; i++) {
             System.out.print("|");
-            for (int j = 0; j < plansza[i].length; j++) {
-                System.out.print(plansza[i][j].getSymbol() + "|");
+            for (int j = 0; j < board.fields[i].length; j++) {
+                System.out.print(board.fields[i][j].getSymbol() + "|");
             }
             System.out.println("");
         }
@@ -170,19 +171,19 @@ public class KolkoKrzyzyk {
         }
 
         try {
-            if (puste == plansza[wiersz][kolumna]) {
+            if (puste == board.fields[wiersz][kolumna]) {
 
                 if (numerRuchu % 2 != 0) {
                     if (kolko.getSymbol() == wynik) {
-                        plansza[wiersz][kolumna] = new Kolko();
+                        board.fields[wiersz][kolumna] = new Kolko();
                     } else {
-                        plansza[wiersz][kolumna] = new Krzyzyk();
+                        board.fields[wiersz][kolumna] = new Krzyzyk();
                     }
                 } else if (numerRuchu % 2 == 0) {
                     if (wynik == kolko.getSymbol()) {
-                        plansza[wiersz][kolumna] = krzyzyk;
+                        board.fields[wiersz][kolumna] = krzyzyk;
                     } else if (wynik == krzyzyk.getSymbol()) {
-                        plansza[wiersz][kolumna] = kolko;
+                        board.fields[wiersz][kolumna] = kolko;
                     }
                 }
             } else {
@@ -198,13 +199,13 @@ public class KolkoKrzyzyk {
     }
 
     public static boolean sprawdz_wygrana(char znak) {
-        for (int i = 0; i < plansza.length; i++) {
+        for (int i = 0; i < board.fields.length; i++) {
             if (sprawdz_wygrana_w_kolumnie(znak, i)) {
                 return true;
             }
 
         }
-        for (int i = 0; i < plansza.length; i++) {
+        for (int i = 0; i < board.fields.length; i++) {
             if (sprawdz_wygrana_w_wierszu(znak, i)) {
                 return true;
             }
@@ -233,9 +234,9 @@ public class KolkoKrzyzyk {
     public static boolean sprawdz_wygrana_w_kolumnie(char znak, int kolumna) {
         boolean result = true;
 
-        for (int i = 0; i < plansza[kolumna].length; i++) {
+        for (int i = 0; i < board.fields[kolumna].length; i++) {
             // System.out.println("["+kolumna+"]["+i+"]"); 
-            if (plansza[kolumna][i].getSymbol() != znak) {
+            if (board.fields[kolumna][i].getSymbol() != znak) {
 
                 result = false;
             }
@@ -250,9 +251,9 @@ public class KolkoKrzyzyk {
      */
     public static boolean sprawdz_wygrana_w_wierszu(char znak, int wiersz) {
         boolean result = true;
-        for (int i = 0; i < plansza[wiersz].length; i++) {
+        for (int i = 0; i < board.fields[wiersz].length; i++) {
             // System.out.println("["+wiersz+"]["+i+"]"); 
-            if (plansza[i][wiersz].getSymbol() != znak) {
+            if (board.fields[i][wiersz].getSymbol() != znak) {
                 result = false;
             }
         }
@@ -265,8 +266,8 @@ public class KolkoKrzyzyk {
 
     public static boolean sprawdz_wygrana_na_skos_1(char znak) {
         boolean result = true;
-        for (int i = 0; i < plansza.length; i++) {
-            if (plansza[i][i].getSymbol() != znak) {
+        for (int i = 0; i < board.fields.length; i++) {
+            if (board.fields[i][i].getSymbol() != znak) {
                 result = false;
             }
 
@@ -276,8 +277,8 @@ public class KolkoKrzyzyk {
 
     public static boolean sprawdz_wygrana_na_skos_2(char znak) {
         boolean result = true;
-        for (int i = 0, j = plansza.length - 1; i < plansza.length; i++, j--) {
-            if (plansza[i][j].getSymbol() != znak) {
+        for (int i = 0, j = board.fields.length - 1; i < board.fields.length; i++, j--) {
+            if (board.fields[i][j].getSymbol() != znak) {
                 result = false;
             }
         }
@@ -287,7 +288,7 @@ public class KolkoKrzyzyk {
 
     public static double pobierz_max_ilosc_ruchow() {
 
-        return Math.pow(plansza.length, 2) + 1;
+        return Math.pow(board.fields.length, 2) + 1;
     }
 
     public static boolean sprawdz_remis() {
