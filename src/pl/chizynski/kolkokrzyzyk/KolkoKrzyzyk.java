@@ -67,7 +67,7 @@ public class KolkoKrzyzyk {
 
             }
 
-            if (rules.sprawdz_remis()) {
+            if (rules.checkDraw()) {
                 endofgame = true;
                 System.out.println("remis");
 

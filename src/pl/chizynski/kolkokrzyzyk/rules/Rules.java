@@ -14,24 +14,24 @@ public class Rules {
 
     public boolean checkWin(char znak) {
         for (int i = 0; i < board.fields.length; i++) {
-            if (sprawdz_wygrana_w_kolumnie(znak, i)) {
+            if (checkWinInColumn(znak, i)) {
                 return true;
             }
 
         }
         for (int i = 0; i < board.fields.length; i++) {
-            if (sprawdz_wygrana_w_wierszu(znak, i)) {
+            if (checkWinInRow(znak, i)) {
                 return true;
             }
         }
 
-        if (sprawdz_wygrana_na_skos(znak)) {
+        if (checkWinInSlant(znak)) {
             return true;
         }
         return false;
     }
 
-    public boolean sprawdz_wygrana_w_kolumnie(char znak, int kolumna) {
+    public boolean checkWinInColumn(char znak, int kolumna) {
         boolean result = true;
 
         for (int i = 0; i < board.fields[kolumna].length; i++) {
@@ -44,7 +44,12 @@ public class Rules {
         return result;
     }
 
-    public boolean sprawdz_wygrana_w_wierszu(char znak, int wiersz) {
+    /**
+     * @param znak wybor czy jest kolko czy krzyzyk
+     * @param wiersz numer wiersza w ktorym nastapila wygrana
+     * @return jesli wygrywa kolko/krzyzyk zwraca true jesli nie wygrywa false
+     */
+    public boolean checkWinInRow(char znak, int wiersz) {
         boolean result = true;
         for (int i = 0; i < board.fields[wiersz].length; i++) {
             // System.out.println("["+wiersz+"]["+i+"]"); 
@@ -55,17 +60,11 @@ public class Rules {
         return result;
     }
 
-    /**
-     * @param znak wybor czy jest kolko czy krzyzyk
-     * @param wiersz numer wiersza w ktorym nastapila wygrana
-     * @return jesli wygrywa kolko/krzyzyk zwraca true jesli nie wygrywa false
-     */
-
-    public boolean sprawdz_wygrana_na_skos(char znak) {
-        return sprawdz_wygrana_na_skos_1(znak) || sprawdz_wygrana_na_skos_2(znak);
+    public boolean checkWinInSlant(char znak) {
+        return checkWinInFirstSlant(znak) || checkWinInSecondSlant(znak);
     }
 
-    public boolean sprawdz_wygrana_na_skos_1(char znak) {
+    public boolean checkWinInFirstSlant(char znak) {
         boolean result = true;
         for (int i = 0; i < board.fields.length; i++) {
             if (board.fields[i][i].getSymbol() != znak) {
@@ -76,7 +75,7 @@ public class Rules {
         return result;
     }
 
-    public boolean sprawdz_wygrana_na_skos_2(char znak) {
+    public boolean checkWinInSecondSlant(char znak) {
         boolean result = true;
         for (int i = 0, j = board.fields.length - 1; i < board.fields.length; i++, j--) {
             if (board.fields[i][j].getSymbol() != znak) {
@@ -86,13 +85,13 @@ public class Rules {
         return result;
     }
 
-    public boolean sprawdz_remis() {
-        
-        return KolkoKrzyzyk.numerRuchu == pobierz_max_ilosc_ruchow() && !checkWin(KolkoKrzyzyk.kolko.getSymbol()) && !checkWin(KolkoKrzyzyk.krzyzyk.getSymbol());
+    public boolean checkDraw() {
+
+        return KolkoKrzyzyk.numerRuchu == getMaxNumberMoves() && !checkWin(KolkoKrzyzyk.kolko.getSymbol()) && !checkWin(KolkoKrzyzyk.krzyzyk.getSymbol());
 
     }
-    
-    public double pobierz_max_ilosc_ruchow() {
+
+    public double getMaxNumberMoves() {
 
         return Math.pow(board.fields.length, 2) + 1;
     }
