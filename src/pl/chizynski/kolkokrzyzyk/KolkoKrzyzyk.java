@@ -6,14 +6,16 @@ import pl.chizynski.kolkokrzyzyk.boards.Board;
 import pl.chizynski.kolkokrzyzyk.figures.Figure;
 import pl.chizynski.kolkokrzyzyk.figures.Kolko;
 import pl.chizynski.kolkokrzyzyk.figures.Krzyzyk;
+import pl.chizynski.kolkokrzyzyk.rules.Rules;
 
 public class KolkoKrzyzyk {
 
-    static Figure kolko = new Kolko();
-    static Figure krzyzyk = new Krzyzyk();
+    public static Figure kolko = new Kolko();
+    public static Figure krzyzyk = new Krzyzyk();
     static Board board = new Board(3);
+    static Rules rules = new Rules(board);
 
-    static int numerRuchu = 1;
+    public static int numerRuchu = 1;
     static char wynik = 0;
 
     public static void main(String[] args) {
@@ -22,7 +24,6 @@ public class KolkoKrzyzyk {
         boolean value = true;
         boolean endofgame = false;
 
-        
         board.displayState();
         System.out.println("wybierz kto zaczyna?:");
         wynik = wybierz_znak();
@@ -56,17 +57,17 @@ public class KolkoKrzyzyk {
             System.out.println("kolejna tura:");
             board.displayState();
 
-            if (sprawdz_wygrana(krzyzyk.getSymbol())) {
+            if (rules.checkWin(krzyzyk.getSymbol())) {
                 endofgame = true;
                 System.out.println("wygrywa X:");
             }
-            if (sprawdz_wygrana(kolko.getSymbol())) {
+            if (rules.checkWin(kolko.getSymbol())) {
                 endofgame = true;
                 System.out.println("wygrywa O:");
 
             }
 
-            if (sprawdz_remis()) {
+            if (rules.sprawdz_remis()) {
                 endofgame = true;
                 System.out.println("remis");
 
@@ -79,7 +80,7 @@ public class KolkoKrzyzyk {
                 if (T.equals("T")) {
 
                     numerRuchu = 0;
-                   
+
                     endofgame = false;
                 } else {
                     break;
@@ -120,7 +121,6 @@ public class KolkoKrzyzyk {
         }
     }
 
-   
     public static Scanner scanner = new Scanner(System.in);
 
     public static boolean pobierz_wartosc() {
@@ -179,25 +179,6 @@ public class KolkoKrzyzyk {
         return value;
     }
 
-    public static boolean sprawdz_wygrana(char znak) {
-        for (int i = 0; i < board.fields.length; i++) {
-            if (sprawdz_wygrana_w_kolumnie(znak, i)) {
-                return true;
-            }
-
-        }
-        for (int i = 0; i < board.fields.length; i++) {
-            if (sprawdz_wygrana_w_wierszu(znak, i)) {
-                return true;
-            }
-        }
-
-        if (sprawdz_wygrana_na_skos(znak)) {
-            return true;
-        }
-        return false;
-    }
-
     public static char wybierz_znak() {
         String wybor = "";
         wybor = scanner.nextLine();
@@ -212,68 +193,4 @@ public class KolkoKrzyzyk {
         return wynik;
     }
 
-    public static boolean sprawdz_wygrana_w_kolumnie(char znak, int kolumna) {
-        boolean result = true;
-
-        for (int i = 0; i < board.fields[kolumna].length; i++) {
-         //   System.out.println("["+kolumna+"]["+i+"]"); 
-            if (board.fields[kolumna][i].getSymbol() != znak) {
-
-                result = false;
-            }
-        }
-        return result;
-    }
-
-    /**
-     * @param znak wybor czy jest kolko czy krzyzyk
-     * @param wiersz numer wiersza w ktorym nastapila wygrana
-     * @return jesli wygrywa kolko/krzyzyk zwraca true jesli nie wygrywa false
-     */
-    public static boolean sprawdz_wygrana_w_wierszu(char znak, int wiersz) {
-        boolean result = true;
-        for (int i = 0; i < board.fields[wiersz].length; i++) {
-            // System.out.println("["+wiersz+"]["+i+"]"); 
-            if (board.fields[i][wiersz].getSymbol() != znak) {
-                result = false;
-            }
-        }
-        return result;
-    }
-
-    public static boolean sprawdz_wygrana_na_skos(char znak) {
-        return sprawdz_wygrana_na_skos_1(znak) || sprawdz_wygrana_na_skos_2(znak);
-    }
-
-    public static boolean sprawdz_wygrana_na_skos_1(char znak) {
-        boolean result = true;
-        for (int i = 0; i < board.fields.length; i++) {
-            if (board.fields[i][i].getSymbol() != znak) {
-                result = false;
-            }
-
-        }
-        return result;
-    }
-
-    public static boolean sprawdz_wygrana_na_skos_2(char znak) {
-        boolean result = true;
-        for (int i = 0, j = board.fields.length - 1; i < board.fields.length; i++, j--) {
-            if (board.fields[i][j].getSymbol() != znak) {
-                result = false;
-            }
-        }
-        return result;
-    }
-
-    public static double pobierz_max_ilosc_ruchow() {
-
-        return Math.pow(board.fields.length, 2) + 1;
-    }
-
-    public static boolean sprawdz_remis() {
-
-        return numerRuchu == pobierz_max_ilosc_ruchow() && !sprawdz_wygrana(kolko.getSymbol()) && !sprawdz_wygrana(krzyzyk.getSymbol());
-
-    }
 }
