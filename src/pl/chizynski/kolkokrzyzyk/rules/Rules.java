@@ -1,6 +1,6 @@
 package pl.chizynski.kolkokrzyzyk.rules;
 
-import pl.chizynski.kolkokrzyzyk.KolkoKrzyzyk;
+import pl.chizynski.kolkokrzyzyk.Game;
 import pl.chizynski.kolkokrzyzyk.boards.Board;
 
 public class Rules {
@@ -41,14 +41,13 @@ public class Rules {
                 result = false;
             }
         }
-        return result;
+        return result; 
     }
+// metoda zwraca wygrana w kolumnie
+//@param znak wybor czy kolko czy krzyzyk
+//@param kolumna wybor kolumny w ktorej nastapila wygrana
+//@return zwraca wynik jesli wygrywa kolko/krzyzyk zwraca true jesli nie false 
 
-    /**
-     * @param znak wybor czy jest kolko czy krzyzyk
-     * @param wiersz numer wiersza w ktorym nastapila wygrana
-     * @return jesli wygrywa kolko/krzyzyk zwraca true jesli nie wygrywa false
-     */
     public boolean checkWinInRow(char znak, int wiersz) {
         boolean result = true;
         for (int i = 0; i < board.fields[wiersz].length; i++) {
@@ -59,6 +58,12 @@ public class Rules {
         }
         return result;
     }
+    /**
+     * metoda sprawdza wygrana w wierszu
+     * @param znak wybor czy jest kolko czy krzyzyk
+     * @param wiersz numer wiersza w ktorym nastapila wygrana
+     * @return jesli wygrywa kolko/krzyzyk zwraca true jesli nie wygrywa false
+     */
 
     public boolean checkWinInSlant(char znak) {
         return checkWinInFirstSlant(znak) || checkWinInSecondSlant(znak);
@@ -73,7 +78,9 @@ public class Rules {
 
         }
         return result;
-    }
+    }//metoda sprawdza wygrana na 1 skosie
+    //@param znak wybor czy kolko czy krzyzyk
+    //@return jesli wygra kolko czy krzyzyk zwraca wynik true jesli nie to false
 
     public boolean checkWinInSecondSlant(char znak) {
         boolean result = true;
@@ -84,10 +91,13 @@ public class Rules {
         }
         return result;
     }
+    //metoda zwraca wygrana na 2 skosie
+    //@param znak wybiera czy kolko czy krzyzyk
+    //@return zwraca wynik jesli wygra krzyzyk czy kolko to true jesli nie false
 
     public boolean checkDraw() {
 
-        return KolkoKrzyzyk.numerRuchu == getMaxNumberMoves() && !checkWin(KolkoKrzyzyk.kolko.getSymbol()) && !checkWin(KolkoKrzyzyk.krzyzyk.getSymbol());
+        return Game.numerRuchu == getMaxNumberMoves() && !checkWin(Game.kolko.getSymbol()) && !checkWin(Game.krzyzyk.getSymbol());
 
     }
 

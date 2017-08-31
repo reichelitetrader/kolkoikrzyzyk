@@ -6,14 +6,16 @@ import pl.chizynski.kolkokrzyzyk.boards.Board;
 import pl.chizynski.kolkokrzyzyk.figures.Figure;
 import pl.chizynski.kolkokrzyzyk.figures.Kolko;
 import pl.chizynski.kolkokrzyzyk.figures.Krzyzyk;
+import pl.chizynski.kolkokrzyzyk.players.Human;
 import pl.chizynski.kolkokrzyzyk.rules.Rules;
-
-public class KolkoKrzyzyk {
+  
+public class Game {
 
     public static Figure kolko = new Kolko();
     public static Figure krzyzyk = new Krzyzyk();
     static Board board = new Board(3);
     static Rules rules = new Rules(board);
+    static Human human = new Human(board);
 
     public static int numerRuchu = 1;
     static char wynik = 0;
@@ -110,7 +112,7 @@ public class KolkoKrzyzyk {
                     }
                 }
             } else {
-                value = pobierz_wartosc();
+                value = human.pobierz_wartosc(numerRuchu, wynik);
             }
             if (value == true) {
                 numerRuchu++;
@@ -122,62 +124,6 @@ public class KolkoKrzyzyk {
     }
 
     public static Scanner scanner = new Scanner(System.in);
-
-    public static boolean pobierz_wartosc() {
-        int wiersz = 0;
-        int kolumna = 0;
-        boolean value = true;
-        System.out.println("wykonaj ruch:");
-
-        try {
-            System.out.println("pobierz wartosc wiersza:");
-            wiersz = Integer.parseInt(scanner.nextLine());
-        } catch (NumberFormatException exc) {
-            value = false;
-            System.out.println("podales niepoprawna wartosc:");
-        } catch (ArrayIndexOutOfBoundsException exc) {
-            value = false;
-            System.out.println("wyszedles poza zakres:");
-        }
-
-        try {
-            System.out.println("pobierz wartosc kolumny:");
-            kolumna = Integer.parseInt(scanner.nextLine());
-        } catch (NumberFormatException exc) {
-            value = false;
-            System.out.println("podales niepoprawna wartosc:");
-        } catch (ArrayIndexOutOfBoundsException exc) {
-            value = false;
-            System.out.println("wyszedles poza zakres:");
-        }
-
-        try {
-            if (Board.puste == board.fields[wiersz][kolumna]) {
-
-                if (numerRuchu % 2 != 0) {
-                    if (kolko.getSymbol() == wynik) {
-                        board.fields[wiersz][kolumna] = new Kolko();
-                    } else {
-                        board.fields[wiersz][kolumna] = new Krzyzyk();
-                    }
-                } else if (numerRuchu % 2 == 0) {
-                    if (wynik == kolko.getSymbol()) {
-                        board.fields[wiersz][kolumna] = krzyzyk;
-                    } else if (wynik == krzyzyk.getSymbol()) {
-                        board.fields[wiersz][kolumna] = kolko;
-                    }
-                }
-            } else {
-                System.out.println("to pole jest zajete wybierz inne:");
-                value = false;
-            }
-
-        } catch (ArrayIndexOutOfBoundsException exc) {
-            System.out.println("wyszedles poza zakres:");
-            value = false;
-        }
-        return value;
-    }
 
     public static char wybierz_znak() {
         String wybor = "";
@@ -192,5 +138,7 @@ public class KolkoKrzyzyk {
         }
         return wynik;
     }
+    
+    
 
 }
