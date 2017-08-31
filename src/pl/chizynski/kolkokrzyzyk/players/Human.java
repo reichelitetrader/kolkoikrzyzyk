@@ -9,10 +9,9 @@ import pl.chizynski.kolkokrzyzyk.figures.Krzyzyk;
 public class Human extends Player {
 
     public static Scanner scanner = new Scanner(System.in);
-    private final Board board;
-    
     public Human(Board board){
-        this.board = board;
+        super(board);
+       
         
     }
     

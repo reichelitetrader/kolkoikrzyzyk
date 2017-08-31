@@ -6,6 +6,7 @@ import pl.chizynski.kolkokrzyzyk.boards.Board;
 import pl.chizynski.kolkokrzyzyk.figures.Figure;
 import pl.chizynski.kolkokrzyzyk.figures.Kolko;
 import pl.chizynski.kolkokrzyzyk.figures.Krzyzyk;
+import pl.chizynski.kolkokrzyzyk.players.Computer;
 import pl.chizynski.kolkokrzyzyk.players.Human;
 import pl.chizynski.kolkokrzyzyk.rules.Rules;
   
@@ -16,6 +17,7 @@ public class Game {
     static Board board = new Board(3);
     static Rules rules = new Rules(board);
     static Human human = new Human(board);
+    static Computer computer = new Computer(board);
 
     public static int numerRuchu = 1;
     static char wynik = 0;
@@ -90,27 +92,9 @@ public class Game {
             }
 
             if (wybor.equals("K") && numerRuchu % 2 != 0) {
-                while (true) {
-                    int x = (int) Math.floor(Math.random() * board.fields.length);
-                    int y = (int) Math.floor(Math.random() * board.fields.length);
-                    if (Board.puste == board.fields[x][y]) {
-                        if (numerRuchu % 2 != 0) {
-                            if (krzyzyk.getSymbol() == wynik) {
-                                board.fields[x][y] = new Krzyzyk();
-                            } else {
-                                board.fields[x][y] = new Kolko();
-                            }
-
-                        } else if (numerRuchu % 2 == 0) {
-                            if (wynik == kolko.getSymbol()) {
-                                board.fields[x][y] = krzyzyk;
-                            } else if (wynik == krzyzyk.getSymbol()) {
-                                board.fields[x][y] = kolko;
-                            }
-                        }
-                        break;
-                    }
-                }
+            
+                 computer.wykonaj_ruch(wynik);
+                
             } else {
                 value = human.pobierz_wartosc(numerRuchu, wynik);
             }
