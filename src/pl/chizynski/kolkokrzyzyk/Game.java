@@ -8,20 +8,20 @@ import pl.chizynski.kolkokrzyzyk.figures.Kolko;
 import pl.chizynski.kolkokrzyzyk.figures.Krzyzyk;
 import pl.chizynski.kolkokrzyzyk.players.Computer;
 import pl.chizynski.kolkokrzyzyk.players.Human;
+import pl.chizynski.kolkokrzyzyk.players.Player;
 import pl.chizynski.kolkokrzyzyk.rules.Rules;
-  
+
 public class Game {
 
     public static Figure kolko = new Kolko();
     public static Figure krzyzyk = new Krzyzyk();
     static Board board = new Board(3);
     static Rules rules = new Rules(board);
-    static Human human = new Human(board);
-    static Computer computer = new Computer(board);
+    static Player playerA;
+    static Player playerB;
 
     public static int numerRuchu = 1;
     static char wynik = 0;
-    
 
     public static void main(String[] args) {
         int wiersz = 0;
@@ -34,15 +34,23 @@ public class Game {
         wynik = wybierz_znak();
 
         String wybor = "";
-        System.out.println("wybor gracza, z kim chcesz zagrac? [K / C]:");
+        System.out.println("wybor gracza1 [K/C]:");
         wybor = scanner.nextLine();
-
         if (wybor.equals("K")) {
-            System.out.println("rozpoczynasz nowa  gre z Computer:");
-
+            playerA = new Computer(board);
         } else if (wybor.equals("C")) {
-            System.out.println("rozpoczynasz nowa gre z graczem:");
+            playerA = new Human(board);
         }
+
+        String wybor1 = "";
+        System.out.println("wybor gracza2 [K/C]:");
+        wybor1 = scanner.nextLine();
+         if (wybor1.equals("K")) {
+            playerB = new Computer(board);
+        } else if (wybor1.equals("C")) {
+            playerB = new Human(board);
+        }
+
         String wybor_planszy = "";
         System.out.println("Wybierz wielkosc planszy M [3x3]  D [5x5] BD [7x7]:");
         wybor_planszy = scanner.nextLine();
@@ -92,12 +100,12 @@ public class Game {
                 }
             }
 
-            if (wybor.equals("K") && numerRuchu % 2 != 0) {
-            
-                 computer.wykonaj_ruch(numerRuchu, wynik);
-                
+            if (  numerRuchu % 2 != 0) {
+
+                value = playerA.wykonaj_ruch(numerRuchu, wynik);
+
             } else {
-                value = human.wykonaj_ruch(numerRuchu, wynik);
+                value = playerB.wykonaj_ruch(numerRuchu, wynik);
             }
             if (value == true) {
                 numerRuchu++;
@@ -123,7 +131,5 @@ public class Game {
         }
         return wynik;
     }
-    
-    
 
 }
