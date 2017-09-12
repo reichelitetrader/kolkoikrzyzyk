@@ -12,9 +12,9 @@ public abstract class Player  {
         this.board = board;
     }
     
-    public void wykonaj_ruch(){
-        System.out.println("");
-    }
+    public abstract boolean wykonaj_ruch(int numerRuchu, char wynik);
+    
+    
     
     
 }

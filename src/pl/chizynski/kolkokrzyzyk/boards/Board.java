@@ -8,15 +8,13 @@ public class Board {
 
     public static Figure puste = new Figure();
     public Figure[][] fields = new Figure[3][3];
-      public static Figure kolko = new Kolko();
+    public static Figure kolko = new Kolko();
     public static Figure krzyzyk = new Krzyzyk();
 
     public Board(int size) {
         this.fields = new Figure[size][size];
-        this.setInitialState(); 
+        this.setInitialState();
     }
-    
-    
 
     public void setInitialState() {
         for (int i = 0; i < this.fields.length; i++) {
@@ -25,7 +23,7 @@ public class Board {
             }
         }
     }
-    
+
     public void displayState() {
         System.out.println("ponizej stan planszy:");
 

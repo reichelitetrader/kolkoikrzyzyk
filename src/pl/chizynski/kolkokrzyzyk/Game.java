@@ -21,6 +21,7 @@ public class Game {
 
     public static int numerRuchu = 1;
     static char wynik = 0;
+    
 
     public static void main(String[] args) {
         int wiersz = 0;
@@ -93,10 +94,10 @@ public class Game {
 
             if (wybor.equals("K") && numerRuchu % 2 != 0) {
             
-                 computer.wykonaj_ruch(wynik);
+                 computer.wykonaj_ruch(numerRuchu, wynik);
                 
             } else {
-                value = human.pobierz_wartosc(numerRuchu, wynik);
+                value = human.wykonaj_ruch(numerRuchu, wynik);
             }
             if (value == true) {
                 numerRuchu++;

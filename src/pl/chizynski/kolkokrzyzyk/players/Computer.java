@@ -2,7 +2,6 @@ package pl.chizynski.kolkokrzyzyk.players;
 
 import static pl.chizynski.kolkokrzyzyk.Game.kolko;
 import static pl.chizynski.kolkokrzyzyk.Game.krzyzyk;
-import static pl.chizynski.kolkokrzyzyk.Game.numerRuchu;
 import pl.chizynski.kolkokrzyzyk.boards.Board;
 import pl.chizynski.kolkokrzyzyk.figures.Kolko;
 import pl.chizynski.kolkokrzyzyk.figures.Krzyzyk;
@@ -14,7 +13,7 @@ public class Computer extends Player {
         super(board);
     }
 
-    public void wykonaj_ruch(int wynik) {
+    public boolean wykonaj_ruch(int numerRuchu, char wynik) {
 
         while (true) {
             int x = (int) Math.floor(Math.random() * this.board.fields.length);
@@ -37,7 +36,7 @@ public class Computer extends Player {
                 break;
             }
         }
-
+return true;
     }
 
 }

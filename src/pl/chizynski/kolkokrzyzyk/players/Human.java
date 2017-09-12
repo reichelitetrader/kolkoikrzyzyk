@@ -1,4 +1,3 @@
-
 package pl.chizynski.kolkokrzyzyk.players;
 
 import java.util.Scanner;
@@ -9,20 +8,18 @@ import pl.chizynski.kolkokrzyzyk.figures.Krzyzyk;
 public class Human extends Player {
 
     public static Scanner scanner = new Scanner(System.in);
-    public Human(Board board){
+
+    public Human(Board board) {
         super(board);
-       
-        
+
     }
-    
-     public boolean pobierz_wartosc(int numerRuchu, char wynik) {
+
+    @Override
+    public boolean wykonaj_ruch(int numerRuchu, char wynik) {
         int wiersz = 0;
         int kolumna = 0;
         boolean value = true;
         System.out.println("wykonaj ruch:");
-        
-        
-        
 
         try {
             System.out.println("pobierz wartosc wiersza:");
@@ -71,7 +68,7 @@ public class Human extends Player {
             System.out.println("wyszedles poza zakres:");
             value = false;
         }
-        return value;
+       return value; 
     }
-    
+
 }
