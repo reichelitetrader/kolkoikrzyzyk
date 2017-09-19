@@ -19,6 +19,7 @@ public class Game {
     static Rules rules = new Rules(board);
     static Player playerA;
     static Player playerB;
+    static Player activePlayer;
 
     public static int numerRuchu = 1;
     static char wynik = 0;
@@ -28,6 +29,7 @@ public class Game {
         int kolumna = 0;
         boolean value = true;
         boolean endofgame = false;
+        activePlayer = playerA;
 
         board.displayState();
         System.out.println("wybierz kto zaczyna?:");
@@ -72,10 +74,12 @@ public class Game {
 
             if (endofgame == true) {
                 String T = "";
+
                 System.out.println("czy chcesz rozpoczac nowa gre? [T/n]");
                 T = scanner.nextLine();
-                if (T.equals("T")) {
 
+                if (T.equals("T")) {
+                    activePlayer = playerA;
                     numerRuchu = 0;
 
                     endofgame = false;
@@ -84,18 +88,10 @@ public class Game {
                 }
             }
 
-            if (numerRuchu % 2 != 0) {
+            switchActivePlayer();
+            value = activePlayer.wykonaj_ruch(numerRuchu, wynik);
 
-                value = playerA.wykonaj_ruch(numerRuchu, wynik);
-
-            } else {
-                value = playerB.wykonaj_ruch(numerRuchu, wynik);
-            }
-            if (value == true) {
-                numerRuchu++;
-            } else {
-                System.out.println("brak zwiekszania tury:");
-            }
+            nextTurn(value);
 
         }
     }
@@ -130,4 +126,24 @@ public class Game {
 
     }
 
+    public static void switchActivePlayer() {
+        if (numerRuchu % 2 != 0) {
+            activePlayer = playerA;
+
+        } else {
+            activePlayer = playerB;
+
+        }
+    }
+
+    public static void nextTurn(boolean value) {
+
+        if (value == true) {
+            numerRuchu++;
+        } else {
+            System.out.println("brak zwiekszania tury:");
+        }
+    }
+    
+    
 }
