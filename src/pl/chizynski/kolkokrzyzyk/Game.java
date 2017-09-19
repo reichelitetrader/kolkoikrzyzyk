@@ -32,24 +32,8 @@ public class Game {
         board.displayState();
         System.out.println("wybierz kto zaczyna?:");
         wynik = wybierz_znak();
-
-        String wybor = "";
-        System.out.println("wybor gracza1 [K/C]:");
-        wybor = scanner.nextLine();
-        if (wybor.equals("K")) {
-            playerA = new Computer(board);
-        } else if (wybor.equals("C")) {
-            playerA = new Human(board);
-        }
-
-        String wybor1 = "";
-        System.out.println("wybor gracza2 [K/C]:");
-        wybor1 = scanner.nextLine();
-         if (wybor1.equals("K")) {
-            playerB = new Computer(board);
-        } else if (wybor1.equals("C")) {
-            playerB = new Human(board);
-        }
+        choice_player("wybor gracza1 [K/C]:");
+        choice_player("wybor gracza2 [K/C]:");
 
         String wybor_planszy = "";
         System.out.println("Wybierz wielkosc planszy M [3x3]  D [5x5] BD [7x7]:");
@@ -100,7 +84,7 @@ public class Game {
                 }
             }
 
-            if (  numerRuchu % 2 != 0) {
+            if (numerRuchu % 2 != 0) {
 
                 value = playerA.wykonaj_ruch(numerRuchu, wynik);
 
@@ -130,6 +114,20 @@ public class Game {
             return wybor.charAt(0);
         }
         return wynik;
+    }
+
+    public static void choice_player(String message) {
+        String wybor = "";
+
+        System.out.println(message);
+        wybor = scanner.nextLine();
+
+        if (wybor.equals("K")) {
+            playerA = new Computer(board);
+        } else if (wybor.equals("C")) {
+            playerA = new Human(board);
+        }
+
     }
 
 }
