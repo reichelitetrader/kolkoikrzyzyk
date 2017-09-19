@@ -34,8 +34,8 @@ public class Game {
         board.displayState();
         System.out.println("wybierz kto zaczyna?:");
         wynik = wybierz_znak();
-        choice_player("wybor gracza1 [K/C]:");
-        choice_player("wybor gracza2 [K/C]:");
+        playerA = choice_player("wybor gracza1 [K/C]:");
+        playerB = choice_player("wybor gracza2 [K/C]:");
 
         String wybor_planszy = "";
         System.out.println("Wybierz wielkosc planszy M [3x3]  D [5x5] BD [7x7]:");
@@ -73,19 +73,7 @@ public class Game {
             }
 
             if (endofgame == true) {
-                String T = "";
-
-                System.out.println("czy chcesz rozpoczac nowa gre? [T/n]");
-                T = scanner.nextLine();
-
-                if (T.equals("T")) {
-                    activePlayer = playerA;
-                    numerRuchu = 0;
-
-                    endofgame = false;
-                } else {
-                    break;
-                }
+                askAboutNewGame(endofgame);
             }
 
             switchActivePlayer();
@@ -112,18 +100,19 @@ public class Game {
         return wynik;
     }
 
-    public static void choice_player(String message) {
-        String wybor = "";
+    public static Player choice_player(String message) {
 
+        String wybor = "";
+        Player player = null;
         System.out.println(message);
         wybor = scanner.nextLine();
 
         if (wybor.equals("K")) {
-            playerA = new Computer(board);
+            player = new Computer(board);
         } else if (wybor.equals("C")) {
-            playerA = new Human(board);
+            player = new Human(board);
         }
-
+        return player;
     }
 
     public static void switchActivePlayer() {
@@ -144,6 +133,21 @@ public class Game {
             System.out.println("brak zwiekszania tury:");
         }
     }
-    
-    
+
+    public static void askAboutNewGame(boolean endofgame) {
+        String T = "";
+
+        System.out.println("czy chcesz rozpoczac nowa gre? [T/n]");
+        T = scanner.nextLine();
+
+        if (T.equals("T")) {
+            activePlayer = playerA;
+            numerRuchu = 0;
+
+            endofgame = false;
+        } else {
+
+        }
+
+    }
 }
