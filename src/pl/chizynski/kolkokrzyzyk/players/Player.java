@@ -13,8 +13,5 @@ public abstract class Player  {
     }
     
     public abstract boolean wykonaj_ruch(int numerRuchu, char wynik);
-    
-    
-    
-    
+   
 }

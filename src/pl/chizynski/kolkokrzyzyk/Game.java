@@ -73,7 +73,11 @@ public class Game {
             }
 
             if (endofgame == true) {
-                askAboutNewGame(endofgame);
+                endofgame = askAboutNewGame(); 
+                if(endofgame == true){
+                    break;
+                    
+                }
             }
 
             switchActivePlayer();
@@ -134,9 +138,9 @@ public class Game {
         }
     }
 
-    public static void askAboutNewGame(boolean endofgame) {
+    public static boolean askAboutNewGame() {
         String T = "";
-
+        boolean endofgame = true;
         System.out.println("czy chcesz rozpoczac nowa gre? [T/n]");
         T = scanner.nextLine();
 
@@ -148,6 +152,8 @@ public class Game {
         } else {
 
         }
-
+        
+        return endofgame;
     }
+
 }
