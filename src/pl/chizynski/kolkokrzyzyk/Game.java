@@ -73,17 +73,20 @@ public class Game {
             }
 
             if (endofgame == true) {
-                endofgame = askAboutNewGame(); 
-                if(endofgame == true){
+                endofgame = askAboutNewGame();
+
+                if (endofgame == true) {
                     break;
-                    
+
                 }
             }
 
-            switchActivePlayer();
-            value = activePlayer.wykonaj_ruch(numerRuchu, wynik);
+            if (!endofgame) {
+                switchActivePlayer();
+                value = activePlayer.wykonaj_ruch(numerRuchu, wynik);
 
-            nextTurn(value);
+                nextTurn(value);
+            }
 
         }
     }
@@ -147,12 +150,12 @@ public class Game {
         if (T.equals("T")) {
             activePlayer = playerA;
             numerRuchu = 0;
-
+            board.setInitialState();
             endofgame = false;
         } else {
 
         }
-        
+
         return endofgame;
     }
 
