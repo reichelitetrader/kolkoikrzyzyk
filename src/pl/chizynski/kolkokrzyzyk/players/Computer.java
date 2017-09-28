@@ -8,7 +8,6 @@ import pl.chizynski.kolkokrzyzyk.figures.Krzyzyk;
 
 public class Computer extends Player {
 
-
     public Computer(Board board) {
         super(board);
     }
@@ -36,7 +35,7 @@ public class Computer extends Player {
                 break;
             }
         }
-return true;
+        return true;
     }
 
 }
