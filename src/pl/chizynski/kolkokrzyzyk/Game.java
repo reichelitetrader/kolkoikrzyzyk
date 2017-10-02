@@ -3,6 +3,7 @@ package pl.chizynski.kolkokrzyzyk;
 
 import java.util.Scanner;
 import pl.chizynski.kolkokrzyzyk.boards.Board;
+import pl.chizynski.kolkokrzyzyk.boards.BoardFactory;
 import pl.chizynski.kolkokrzyzyk.figures.Figure;
 import pl.chizynski.kolkokrzyzyk.figures.Kolko;
 import pl.chizynski.kolkokrzyzyk.figures.Krzyzyk;
@@ -37,20 +38,13 @@ public class Game {
         playerA = choice_player("wybor gracza1 [K/C]:");
         playerB = choice_player("wybor gracza2 [K/C]:");
 
-        String wybor_planszy = "";
+        String boardSizeInString = "";
         System.out.println("Wybierz wielkosc planszy M [3x3]  D [5x5] BD [7x7]:");
-        wybor_planszy = scanner.nextLine();
+        boardSizeInString = scanner.nextLine();
 
-        if (wybor_planszy.equals("M")) {
-            System.out.println("wybrales plansze mala 3x3:");
-        } else if (wybor_planszy.equals("D")) {
-            System.out.println("wybrales plansze duza 5x5:");
-            board = new Board(5);
-
-        } else if (wybor_planszy.equals("BD")) {
-            System.out.println("wybrales plansze duza 7x7:");
-            board = new Board(7);
-        }
+        
+        board = BoardFactory.createBoard(boardSizeInString);
+        //TODO: Tworzy nowa plansze ale nie wyswietla stanow;
 
         while (true) {
             System.out.println("kolejna tura:");
