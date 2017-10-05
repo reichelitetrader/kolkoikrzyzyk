@@ -4,6 +4,7 @@ package pl.chizynski.kolkokrzyzyk;
 import java.util.Scanner;
 import pl.chizynski.kolkokrzyzyk.boards.Board;
 import pl.chizynski.kolkokrzyzyk.boards.BoardFactory;
+import pl.chizynski.kolkokrzyzyk.players.PlayerFactory;
 import pl.chizynski.kolkokrzyzyk.figures.Figure;
 import pl.chizynski.kolkokrzyzyk.figures.Kolko;
 import pl.chizynski.kolkokrzyzyk.figures.Krzyzyk;
@@ -42,7 +43,6 @@ public class Game {
         System.out.println("Wybierz wielkosc planszy M [3x3]  D [5x5] BD [7x7]:");
         boardSizeInString = scanner.nextLine();
 
-        
         board = BoardFactory.createBoard(boardSizeInString);
         //TODO: Tworzy nowa plansze ale nie wyswietla stanow;
 
@@ -108,11 +108,7 @@ public class Game {
         System.out.println(message);
         wybor = scanner.nextLine();
 
-        if (wybor.equals("K")) {
-            player = new Computer(board);
-        } else if (wybor.equals("C")) {
-            player = new Human(board);
-        }
+        player = PlayerFactory.createPlayer(message, board, wybor);
         return player;
     }
 
@@ -144,7 +140,7 @@ public class Game {
         if (T.equals("T")) {
             activePlayer = playerA;
             numerRuchu = 0;
-            board.setInitialState();
+            board.setInitialState(); 
             endofgame = false;
         } else {
 
