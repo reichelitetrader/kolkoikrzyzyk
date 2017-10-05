@@ -33,18 +33,18 @@ public class Game {
         boolean endofgame = false;
         activePlayer = playerA;
 
-        board.displayState();
-        System.out.println("wybierz kto zaczyna?:");
-        wynik = wybierz_znak();
-        playerA = choice_player("wybor gracza1 [K/C]:");
-        playerB = choice_player("wybor gracza2 [K/C]:");
-
         String boardSizeInString = "";
         System.out.println("Wybierz wielkosc planszy M [3x3]  D [5x5] BD [7x7]:");
         boardSizeInString = scanner.nextLine();
 
         board = BoardFactory.createBoard(boardSizeInString);
         //TODO: Tworzy nowa plansze ale nie wyswietla stanow;
+     
+        System.out.println("wybierz kto zaczyna?:");
+        wynik = wybierz_znak();
+        playerA = choice_player("wybor gracza1 [K/C]:");
+        playerB = choice_player("wybor gracza2 [K/C]:");
+
 
         while (true) {
             System.out.println("kolejna tura:");
