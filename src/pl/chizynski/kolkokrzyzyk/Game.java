@@ -39,6 +39,7 @@ public class Game {
         boardSizeInString = scanner.nextLine();
 
         board = BoardFactory.createBoard(boardSizeInString);
+        rules.board = board;
         //TODO: Tworzy nowa plansze ale nie wyswietla stanow;
      
         System.out.println("wybierz kto zaczyna?:");
