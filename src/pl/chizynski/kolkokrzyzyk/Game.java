@@ -6,6 +6,7 @@ import pl.chizynski.kolkokrzyzyk.boards.Board;
 import pl.chizynski.kolkokrzyzyk.boards.BoardFactory;
 import pl.chizynski.kolkokrzyzyk.players.PlayerFactory;
 import pl.chizynski.kolkokrzyzyk.figures.Figure;
+import pl.chizynski.kolkokrzyzyk.figures.FigureFactory;
 import pl.chizynski.kolkokrzyzyk.figures.Kolko;
 import pl.chizynski.kolkokrzyzyk.figures.Krzyzyk;
 import pl.chizynski.kolkokrzyzyk.players.Computer;
@@ -15,8 +16,8 @@ import pl.chizynski.kolkokrzyzyk.rules.Rules;
 
 public class Game {
 
-    public static Figure kolko = new Kolko();
-    public static Figure krzyzyk = new Krzyzyk();
+    public static Figure kolko = FigureFactory.createFigure('O');
+    public static Figure krzyzyk = FigureFactory.createFigure('X');
     static Board board = new Board(3);
     static Rules rules = new Rules(board);
     static Player playerA;

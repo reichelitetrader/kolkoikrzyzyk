@@ -3,6 +3,7 @@ package pl.chizynski.kolkokrzyzyk.players;
 import static pl.chizynski.kolkokrzyzyk.Game.kolko;
 import static pl.chizynski.kolkokrzyzyk.Game.krzyzyk;
 import pl.chizynski.kolkokrzyzyk.boards.Board;
+import pl.chizynski.kolkokrzyzyk.figures.FigureFactory;
 import pl.chizynski.kolkokrzyzyk.figures.Kolko;
 import pl.chizynski.kolkokrzyzyk.figures.Krzyzyk;
 
@@ -20,9 +21,9 @@ public class Computer extends Player {
             if (Board.puste == board.fields[x][y]) {
                 if (numerRuchu % 2 != 0) {
                     if (krzyzyk.getSymbol() == wynik) {
-                        board.fields[x][y] = new Krzyzyk();
+                        board.fields[x][y] = FigureFactory.createFigure('O');
                     } else {
-                        board.fields[x][y] = new Kolko();
+                        board.fields[x][y] = FigureFactory.createFigure('O');
                     }
 
                 } else if (numerRuchu % 2 == 0) {

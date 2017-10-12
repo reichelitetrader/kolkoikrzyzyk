@@ -5,5 +5,6 @@ public class Kolko extends Figure {
   public Kolko(){
       symbol = 'O'; 
   }
+  
     
 }

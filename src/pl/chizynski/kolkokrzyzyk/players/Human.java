@@ -2,6 +2,7 @@ package pl.chizynski.kolkokrzyzyk.players;
 
 import java.util.Scanner;
 import pl.chizynski.kolkokrzyzyk.boards.Board;
+import pl.chizynski.kolkokrzyzyk.figures.FigureFactory;
 import pl.chizynski.kolkokrzyzyk.figures.Kolko;
 import pl.chizynski.kolkokrzyzyk.figures.Krzyzyk;
 
@@ -48,9 +49,9 @@ public class Human extends Player {
 
                 if (numerRuchu % 2 != 0) {
                     if (Board.kolko.getSymbol() == wynik) {
-                        board.fields[wiersz][kolumna] = new Kolko();
+                        board.fields[wiersz][kolumna] = FigureFactory.createFigure('O');
                     } else {
-                        board.fields[wiersz][kolumna] = new Krzyzyk();
+                        board.fields[wiersz][kolumna] = FigureFactory.createFigure('X');
                     }
                 } else if (numerRuchu % 2 == 0) {
                     if (wynik == Board.kolko.getSymbol()) {
