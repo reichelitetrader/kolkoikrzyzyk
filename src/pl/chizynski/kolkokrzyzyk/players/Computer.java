@@ -21,7 +21,7 @@ public class Computer extends Player {
             if (Board.puste == board.fields[x][y]) {
                 if (numerRuchu % 2 != 0) {
                     if (krzyzyk.getSymbol() == wynik) {
-                        board.fields[x][y] = FigureFactory.createFigure('O');
+                        board.fields[x][y] = FigureFactory.createFigure('X');
                     } else {
                         board.fields[x][y] = FigureFactory.createFigure('O');
                     }
