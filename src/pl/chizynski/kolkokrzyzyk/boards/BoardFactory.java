@@ -3,7 +3,7 @@ package pl.chizynski.kolkokrzyzyk.boards;
 public class BoardFactory {
 
     public static Board createBoard(String boardSizeInString) {
-        Board board = new Board(5);
+        Board board = new Board(3);
         if (boardSizeInString.equals("M")) {
             System.out.println("wybrales plansze mala 3x3:");
         } else if (boardSizeInString.equals("D")) {
