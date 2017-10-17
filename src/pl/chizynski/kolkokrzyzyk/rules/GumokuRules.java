@@ -45,5 +45,40 @@ public class GumokuRules extends Rules {
         }
         return result;
     }
+    
+    
+    @Override
+    public boolean checkWinInFirstSlant(char znak) {
+        boolean result = false;
+        int amount_of_exist = 0;
+        for (int i = 0; i < board.fields.length; i++) {
+            if (board.fields[i][i].getSymbol() == znak) {
+                amount_of_exist++;
+            }else{
+                amount_of_exist =0;
+            }
+        if(amount_of_exist ==5){
+        result = true;
+        }
+    }
+        return result;
+    }
+
+    @Override
+    public boolean checkWinInSecondSlant(char znak) {
+        boolean result = false;
+        int amount_of_exist = 0;
+        for (int i = 0, j = board.fields.length - 1; i < board.fields.length; i++, j--) {
+            if (board.fields[i][j].getSymbol() == znak) {
+                amount_of_exist++;
+            }else{
+                amount_of_exist = 0;
+            }
+            if(amount_of_exist ==5){
+                result = true;
+            }
+        }
+        return result;
+    }
 
 }
