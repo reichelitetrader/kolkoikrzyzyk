@@ -35,7 +35,7 @@ public class Game {
         activePlayer = playerA;
 
         String boardSizeInString = "";
-        System.out.println("Wybierz wielkosc planszy M [3x3]  D [5x5] BD [7x7]:");
+        System.out.println("Wybierz wielkosc planszy M [3x3]  D [5x5] BD [7x7] GUMOKU [13x13]:");
         boardSizeInString = scanner.nextLine();
 
         board = BoardFactory.createBoard(boardSizeInString);
