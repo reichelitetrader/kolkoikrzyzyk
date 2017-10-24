@@ -12,6 +12,7 @@ import pl.chizynski.kolkokrzyzyk.figures.Krzyzyk;
 import pl.chizynski.kolkokrzyzyk.players.Computer;
 import pl.chizynski.kolkokrzyzyk.players.Human;
 import pl.chizynski.kolkokrzyzyk.players.Player;
+import pl.chizynski.kolkokrzyzyk.rules.GumokuRules;
 import pl.chizynski.kolkokrzyzyk.rules.Rules;
 
 public class Game {
@@ -20,9 +21,10 @@ public class Game {
     public static Figure krzyzyk = FigureFactory.createFigure('X');
     static Board board = new Board(3);
     static Rules rules = new Rules(board);
+
     static Player playerA;
     static Player playerB;
-    static Player activePlayer;
+    static Player activePlayer; 
 
     public static int numerRuchu = 1;
     static char wynik = 0;
@@ -39,14 +41,17 @@ public class Game {
         boardSizeInString = scanner.nextLine();
 
         board = BoardFactory.createBoard(boardSizeInString);
+        if (boardSizeInString.equals("GUMOKU")) {
+            rules = new GumokuRules(board);
+
+        }
         rules.board = board;
+
         //TODO: Tworzy nowa plansze ale nie wyswietla stanow;
-     
         System.out.println("wybierz kto zaczyna?:");
         wynik = wybierz_znak();
         playerA = choice_player("wybor gracza1 [K/C]:");
         playerB = choice_player("wybor gracza2 [K/C]:");
-
 
         while (true) {
             System.out.println("kolejna tura:");
@@ -142,7 +147,7 @@ public class Game {
         if (T.equals("T")) {
             activePlayer = playerA;
             numerRuchu = 0;
-            board.setInitialState(); 
+            board.setInitialState();
             endofgame = false;
         } else {
 

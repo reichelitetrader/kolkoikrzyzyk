@@ -13,6 +13,9 @@ public class BoardFactory {
         } else if (boardSizeInString.equals("BD")) {
             System.out.println("wybrales plansze duza 7x7:");
             board = new Board(7);
+        } else if (boardSizeInString.equals("GUMOKU")){
+            System.out.println("wybrales plansze duza 13x13:");
+            board = new Board(13);
         }
         return board;
     }
