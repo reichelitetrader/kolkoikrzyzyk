@@ -7,20 +7,17 @@ import pl.chizynski.kolkokrzyzyk.boards.BoardFactory;
 import pl.chizynski.kolkokrzyzyk.players.PlayerFactory;
 import pl.chizynski.kolkokrzyzyk.figures.Figure;
 import pl.chizynski.kolkokrzyzyk.figures.FigureFactory;
-import pl.chizynski.kolkokrzyzyk.figures.Kolko;
-import pl.chizynski.kolkokrzyzyk.figures.Krzyzyk;
-import pl.chizynski.kolkokrzyzyk.players.Computer;
-import pl.chizynski.kolkokrzyzyk.players.Human;
 import pl.chizynski.kolkokrzyzyk.players.Player;
 import pl.chizynski.kolkokrzyzyk.rules.GumokuRules;
 import pl.chizynski.kolkokrzyzyk.rules.Rules;
+import pl.chizynski.kolkokrzyzyk.rules.RulesFactory;
 
 public class Game {
 
     public static Figure kolko = FigureFactory.createFigure('O');
     public static Figure krzyzyk = FigureFactory.createFigure('X');
     static Board board = new Board(3);
-    static Rules rules = new Rules(board);
+    static Rules rules = null;
 
     static Player playerA;
     static Player playerB;
@@ -40,11 +37,10 @@ public class Game {
         System.out.println("Wybierz wielkosc planszy M [3x3]  D [5x5] BD [7x7] GUMOKU [13x13]:");
         boardSizeInString = scanner.nextLine();
 
+        rules = RulesFactory.createRules( boardSizeInString, board );
+        
         board = BoardFactory.createBoard(boardSizeInString);
-        if (boardSizeInString.equals("GUMOKU")) {
-            rules = new GumokuRules(board);
-
-        }
+       
         rules.board = board;
 
         //TODO: Tworzy nowa plansze ale nie wyswietla stanow;
