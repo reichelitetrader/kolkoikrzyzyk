@@ -21,7 +21,7 @@ public class Game {
 
     static Player playerA;
     static Player playerB;
-    static Player activePlayer; 
+    static Player activePlayer;
 
     public static int numerRuchu = 1;
     static char wynik = 0;
@@ -36,13 +36,11 @@ public class Game {
         String boardSizeInString = "";
         System.out.println("Wybierz wielkosc planszy M [3x3]  D [5x5] BD [7x7] GUMOKU [13x13]:");
         boardSizeInString = scanner.nextLine();
-
-        rules = RulesFactory.createRules( boardSizeInString, board );
         
         board = BoardFactory.createBoard(boardSizeInString);
-       
-        rules.board = board;
+        rules = RulesFactory.createRules(boardSizeInString, board);
 
+        
         //TODO: Tworzy nowa plansze ale nie wyswietla stanow;
         System.out.println("wybierz kto zaczyna?:");
         wynik = wybierz_znak();
