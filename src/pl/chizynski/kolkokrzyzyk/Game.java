@@ -15,6 +15,7 @@ public class Game {
 
     public static Figure kolko = FigureFactory.createFigure('O');
     public static Figure krzyzyk = FigureFactory.createFigure('X');
+    public static int numerRuchu = 1;
     Board board = new Board(3);
 
     Rules rules = null;
@@ -23,7 +24,6 @@ public class Game {
     Player playerB;
     Player activePlayer;
 
-    public static int numerRuchu = 1;
     char wynik = 0;
 
     public static void main(String[] args) {
