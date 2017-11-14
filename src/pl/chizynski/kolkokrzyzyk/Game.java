@@ -17,11 +17,11 @@ public class Game {
     public static Figure krzyzyk = FigureFactory.createFigure('X');
     Board board = new Board(3);
 
-    static Rules rules = null;
+    Rules rules = null;
 
-    static Player playerA;
-    static Player playerB;
-    static Player activePlayer;
+    Player playerA;
+    Player playerB;
+    Player activePlayer;
 
     public static int numerRuchu = 1;
     static char wynik = 0;
@@ -31,8 +31,8 @@ public class Game {
         int kolumna = 0;
         boolean value = true;
         boolean endofgame = false;
-        activePlayer = playerA;
         Game game = new Game();
+        game.activePlayer = game.playerA;
 
         String boardSizeInString = "";
         System.out.println("Wybierz wielkosc planszy M [3x3]  D [5x5] BD [7x7] GUMOKU [13x13]:");
@@ -40,29 +40,29 @@ public class Game {
 
         game.board = BoardFactory.createBoard(boardSizeInString);
 
-        rules = RulesFactory.createRules(boardSizeInString, game.board);
+        game.rules = RulesFactory.createRules(boardSizeInString, game.board);
 
         //TODO: Tworzy nowa plansze ale nie wyswietla stanow;
         System.out.println("wybierz kto zaczyna?:");
         wynik = wybierz_znak();
-        playerA = game.choice_player("wybor gracza1 [K/C]:");
-        playerB = game.choice_player("wybor gracza2 [K/C]:");
+        game.playerA = game.choice_player("wybor gracza1 [K/C]:");
+        game.playerB = game.choice_player("wybor gracza2 [K/C]:");
 
         while (true) {
             System.out.println("kolejna tura:");
             game.board.displayState();
 
-            if (rules.checkWin(krzyzyk.getSymbol())) {
+            if (game.rules.checkWin(game.krzyzyk.getSymbol())) {
                 endofgame = true;
                 System.out.println("wygrywa X:");
             }
-            if (rules.checkWin(kolko.getSymbol())) {
+            if (game.rules.checkWin(game.kolko.getSymbol())) {
                 endofgame = true;
                 System.out.println("wygrywa O:");
 
             }
 
-            if (rules.checkDraw()) {
+            if (game.rules.checkDraw()) {
                 endofgame = true;
                 System.out.println("remis");
 
@@ -78,10 +78,10 @@ public class Game {
             }
 
             if (!endofgame) {
-                switchActivePlayer();
-                value = activePlayer.wykonaj_ruch(numerRuchu, wynik);
+                game.switchActivePlayer();
+                value = game.activePlayer.wykonaj_ruch(game.numerRuchu, wynik);
 
-                nextTurn(value);
+                game.nextTurn(value);
             }
 
         }
@@ -114,7 +114,7 @@ public class Game {
         return player;
     }
 
-    public static void switchActivePlayer() {
+    public void switchActivePlayer() {
         if (numerRuchu % 2 != 0) {
             activePlayer = playerA;
 
@@ -124,7 +124,7 @@ public class Game {
         }
     }
 
-    public static void nextTurn(boolean value) {
+    public void nextTurn(boolean value) {
 
         if (value == true) {
             numerRuchu++;
