@@ -27,64 +27,9 @@ public class Game {
     char wynik = 0;
 
     public static void main(String[] args) {
-        int wiersz = 0;
-        int kolumna = 0;
-        boolean value = true;
-        boolean endofgame = false;
         Game game = new Game();
-        game.activePlayer = game.playerA;
+        game.startGame();
 
-        String boardSizeInString = "";
-        System.out.println("Wybierz wielkosc planszy M [3x3]  D [5x5] BD [7x7] GUMOKU [13x13]:");
-        boardSizeInString = scanner.nextLine();
-
-        game.board = BoardFactory.createBoard(boardSizeInString);
-
-        game.rules = RulesFactory.createRules(boardSizeInString, game.board);
-
-        //TODO: Tworzy nowa plansze ale nie wyswietla stanow;
-        System.out.println("wybierz kto zaczyna?:");
-        game.wynik = game.wybierz_znak();
-        game.playerA = game.choice_player("wybor gracza1 [K/C]:");
-        game.playerB = game.choice_player("wybor gracza2 [K/C]:");
-
-        while (true) {
-            System.out.println("kolejna tura:");
-            game.board.displayState();
-
-            if (game.rules.checkWin(game.krzyzyk.getSymbol())) {
-                endofgame = true;
-                System.out.println("wygrywa X:");
-            }
-            if (game.rules.checkWin(game.kolko.getSymbol())) {
-                endofgame = true;
-                System.out.println("wygrywa O:");
-
-            }
-
-            if (game.rules.checkDraw()) {
-                endofgame = true;
-                System.out.println("remis");
-
-            }
-
-            if (endofgame == true) {
-                endofgame = game.askAboutNewGame();
-
-                if (endofgame == true) {
-                    break;
-
-                }
-            }
-
-            if (!endofgame) {
-                game.switchActivePlayer();
-                value = game.activePlayer.wykonaj_ruch(game.numerRuchu, game.wynik);
-
-                game.nextTurn(value);
-            }
-
-        }
     }
 
     public static Scanner scanner = new Scanner(System.in);
@@ -149,6 +94,68 @@ public class Game {
         }
 
         return endofgame;
+    }
+
+    public void startGame() {
+        int wiersz = 0;
+        int kolumna = 0;
+        boolean value = true;
+        boolean endofgame = false;
+
+        activePlayer = playerA;  // JESLI METODA NIE JEST STATYCZNA UZYWAMY THIS LUB NIE MUSIMY SIE ODWOLYWAC POPRZEZ OBIEKTY 
+
+        String boardSizeInString = "";
+        System.out.println("Wybierz wielkosc planszy M [3x3]  D [5x5] BD [7x7] GUMOKU [13x13]:");
+        boardSizeInString = scanner.nextLine();
+
+        board = BoardFactory.createBoard(boardSizeInString);
+
+        rules = RulesFactory.createRules(boardSizeInString, board);
+
+        //TODO: Tworzy nowa plansze ale nie wyswietla stanow;
+        System.out.println("wybierz kto zaczyna?:");
+        wynik = wybierz_znak();
+        playerA = choice_player("wybor gracza1 [K/C]:");
+        playerB = choice_player("wybor gracza2 [K/C]:");
+
+        while (true) {
+            System.out.println("kolejna tura:");
+            board.displayState();
+
+            if (rules.checkWin(krzyzyk.getSymbol())) {
+                endofgame = true;
+                System.out.println("wygrywa X:");
+            }
+            if (rules.checkWin(kolko.getSymbol())) {
+                endofgame = true;
+                System.out.println("wygrywa O:");
+
+            }
+
+            if (rules.checkDraw()) {
+                endofgame = true;
+                System.out.println("remis");
+
+            }
+
+            if (endofgame == true) {
+                endofgame = askAboutNewGame();
+
+                if (endofgame == true) {
+                    break;
+
+                }
+            }
+
+            if (!endofgame) {
+                switchActivePlayer();
+                value = activePlayer.wykonaj_ruch(numerRuchu, wynik);
+
+                nextTurn(value);
+            }
+
+        }
+
     }
 
 }
