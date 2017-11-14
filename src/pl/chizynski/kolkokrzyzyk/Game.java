@@ -24,7 +24,7 @@ public class Game {
     Player activePlayer;
 
     public static int numerRuchu = 1;
-    static char wynik = 0;
+    char wynik = 0;
 
     public static void main(String[] args) {
         int wiersz = 0;
@@ -44,7 +44,7 @@ public class Game {
 
         //TODO: Tworzy nowa plansze ale nie wyswietla stanow;
         System.out.println("wybierz kto zaczyna?:");
-        wynik = wybierz_znak();
+        game.wynik = game.wybierz_znak();
         game.playerA = game.choice_player("wybor gracza1 [K/C]:");
         game.playerB = game.choice_player("wybor gracza2 [K/C]:");
 
@@ -79,7 +79,7 @@ public class Game {
 
             if (!endofgame) {
                 game.switchActivePlayer();
-                value = game.activePlayer.wykonaj_ruch(game.numerRuchu, wynik);
+                value = game.activePlayer.wykonaj_ruch(game.numerRuchu, game.wynik);
 
                 game.nextTurn(value);
             }
@@ -89,7 +89,7 @@ public class Game {
 
     public static Scanner scanner = new Scanner(System.in);
 
-    public static char wybierz_znak() {
+    public char wybierz_znak() {
         String wybor = "";
         wybor = scanner.nextLine();
         if (wybor.equals("O")) {
