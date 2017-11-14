@@ -8,7 +8,6 @@ import pl.chizynski.kolkokrzyzyk.players.PlayerFactory;
 import pl.chizynski.kolkokrzyzyk.figures.Figure;
 import pl.chizynski.kolkokrzyzyk.figures.FigureFactory;
 import pl.chizynski.kolkokrzyzyk.players.Player;
-import pl.chizynski.kolkokrzyzyk.rules.GumokuRules;
 import pl.chizynski.kolkokrzyzyk.rules.Rules;
 import pl.chizynski.kolkokrzyzyk.rules.RulesFactory;
 
@@ -16,7 +15,8 @@ public class Game {
 
     public static Figure kolko = FigureFactory.createFigure('O');
     public static Figure krzyzyk = FigureFactory.createFigure('X');
-    static Board board = new Board(3);
+    Board board = new Board(3);
+
     static Rules rules = null;
 
     static Player playerA;
@@ -32,24 +32,25 @@ public class Game {
         boolean value = true;
         boolean endofgame = false;
         activePlayer = playerA;
+        Game game = new Game();
 
         String boardSizeInString = "";
         System.out.println("Wybierz wielkosc planszy M [3x3]  D [5x5] BD [7x7] GUMOKU [13x13]:");
         boardSizeInString = scanner.nextLine();
-        
-        board = BoardFactory.createBoard(boardSizeInString);
-        rules = RulesFactory.createRules(boardSizeInString, board);
 
-        
+        game.board = BoardFactory.createBoard(boardSizeInString);
+
+        rules = RulesFactory.createRules(boardSizeInString, game.board);
+
         //TODO: Tworzy nowa plansze ale nie wyswietla stanow;
         System.out.println("wybierz kto zaczyna?:");
         wynik = wybierz_znak();
-        playerA = choice_player("wybor gracza1 [K/C]:");
-        playerB = choice_player("wybor gracza2 [K/C]:");
+        playerA = game.choice_player("wybor gracza1 [K/C]:");
+        playerB = game.choice_player("wybor gracza2 [K/C]:");
 
         while (true) {
             System.out.println("kolejna tura:");
-            board.displayState();
+            game.board.displayState();
 
             if (rules.checkWin(krzyzyk.getSymbol())) {
                 endofgame = true;
@@ -68,7 +69,7 @@ public class Game {
             }
 
             if (endofgame == true) {
-                endofgame = askAboutNewGame();
+                endofgame = game.askAboutNewGame();
 
                 if (endofgame == true) {
                     break;
@@ -102,7 +103,7 @@ public class Game {
         return wynik;
     }
 
-    public static Player choice_player(String message) {
+    public Player choice_player(String message) {
 
         String wybor = "";
         Player player = null;
@@ -132,7 +133,7 @@ public class Game {
         }
     }
 
-    public static boolean askAboutNewGame() {
+    public boolean askAboutNewGame() {
         String T = "";
         boolean endofgame = true;
         System.out.println("czy chcesz rozpoczac nowa gre? [T/n]");
