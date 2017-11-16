@@ -3,8 +3,7 @@ package pl.chizynski.kolkokrzyzyk.players;
 import java.util.Scanner;
 import pl.chizynski.kolkokrzyzyk.boards.Board;
 import pl.chizynski.kolkokrzyzyk.figures.FigureFactory;
-import pl.chizynski.kolkokrzyzyk.figures.Kolko;
-import pl.chizynski.kolkokrzyzyk.figures.Krzyzyk;
+
 
 public class Human extends Player {
 
@@ -45,19 +44,19 @@ public class Human extends Player {
         }
 
         try {
-            if (Board.puste == this.board.fields[wiersz][kolumna]) {
+            if (Board.puste == this.board.getFields()[wiersz][kolumna]) {
 
                 if (numerRuchu % 2 != 0) {
                     if (Board.kolko.getSymbol() == wynik) {
-                        board.fields[wiersz][kolumna] = FigureFactory.createFigure('O');
+                        board.getFields()[wiersz][kolumna] = FigureFactory.createFigure('O');
                     } else {
-                        board.fields[wiersz][kolumna] = FigureFactory.createFigure('X');
+                        board.getFields()[wiersz][kolumna] = FigureFactory.createFigure('X');
                     }
                 } else if (numerRuchu % 2 == 0) {
                     if (wynik == Board.kolko.getSymbol()) {
-                        board.fields[wiersz][kolumna] = Board.krzyzyk;
+                        board.getFields()[wiersz][kolumna] = Board.krzyzyk;
                     } else if (wynik == Board.krzyzyk.getSymbol()) {
-                        board.fields[wiersz][kolumna] = Board.kolko;
+                        board.getFields()[wiersz][kolumna] = Board.kolko;
                     }
                 }
             } else {

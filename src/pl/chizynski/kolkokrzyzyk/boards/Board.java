@@ -9,7 +9,7 @@ public class Board {
 
     private Game game = new Game();
     public static Figure puste = new Figure();
-    public Figure[][] fields = new Figure[3][3];
+    private Figure[][] fields = new Figure[3][3];
     public static Figure kolko = FigureFactory.createFigure('O');
     public static Figure krzyzyk = FigureFactory.createFigure('X');
     
@@ -45,5 +45,13 @@ public class Board {
     }
     public void setGame(Game game){
         this.game = game;
+    }
+    
+    public Figure[][] getFields(){
+        return fields;
+    }
+    public void setFields(Figure[][] fields){
+        this.fields = fields;
+        
     }
 }

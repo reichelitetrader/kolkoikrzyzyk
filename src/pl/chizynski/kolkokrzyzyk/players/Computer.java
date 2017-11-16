@@ -16,21 +16,21 @@ public class Computer extends Player {
     public boolean wykonaj_ruch(int numerRuchu, char wynik) {
 
         while (true) {
-            int x = (int) Math.floor(Math.random() * this.board.fields.length);
-            int y = (int) Math.floor(Math.random() * board.fields.length);
-            if (Board.puste == board.fields[x][y]) {
+            int x = (int) Math.floor(Math.random() * this.board.getFields().length);
+            int y = (int) Math.floor(Math.random() * board.getFields().length);
+            if (Board.puste == board.getFields()[x][y]) {
                 if (numerRuchu % 2 != 0) {
                     if (krzyzyk.getSymbol() == wynik) {
-                        board.fields[x][y] = FigureFactory.createFigure('X');
+                        board.getFields()[x][y] = FigureFactory.createFigure('X');
                     } else {
-                        board.fields[x][y] = FigureFactory.createFigure('O');
+                        board.getFields()[x][y] = FigureFactory.createFigure('O');
                     }
 
                 } else if (numerRuchu % 2 == 0) {
                     if (wynik == kolko.getSymbol()) {
-                        board.fields[x][y] = krzyzyk;
+                        board.getFields()[x][y] = krzyzyk;
                     } else if (wynik == krzyzyk.getSymbol()) {
-                        board.fields[x][y] = kolko;
+                        board.getFields()[x][y] = kolko;
                     }
                 }
                 break;

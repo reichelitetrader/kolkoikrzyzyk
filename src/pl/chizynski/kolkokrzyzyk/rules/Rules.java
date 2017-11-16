@@ -13,13 +13,13 @@ public class Rules {
     }
 
     public boolean checkWin(char znak) {
-        for (int i = 0; i < board.fields.length; i++) {
+        for (int i = 0; i < board.getFields().length; i++) {
             if (checkWinInColumn(znak, i)) {
                 return true;
             }
 
         }
-        for (int i = 0; i < board.fields.length; i++) {
+        for (int i = 0; i < board.getFields().length; i++) {
             if (checkWinInRow(znak, i)) {
                 return true;
             }
@@ -34,9 +34,9 @@ public class Rules {
     public boolean checkWinInColumn(char znak, int kolumna) {
         boolean result = true;
 
-        for (int i = 0; i < board.fields[kolumna].length; i++) {
+        for (int i = 0; i < board.getFields()[kolumna].length; i++) {
             //   System.out.println("["+kolumna+"]["+i+"]"); 
-            if (board.fields[kolumna][i].getSymbol() != znak) {
+            if (board.getFields()[kolumna][i].getSymbol() != znak) {
 
                 result = false;
             }
@@ -50,9 +50,9 @@ public class Rules {
 
     public boolean checkWinInRow(char znak, int wiersz) {
         boolean result = true;
-        for (int i = 0; i < board.fields[wiersz].length; i++) {
+        for (int i = 0; i < board.getFields()[wiersz].length; i++) {
             // System.out.println("["+wiersz+"]["+i+"]"); 
-            if (board.fields[i][wiersz].getSymbol() != znak) {
+            if (board.getFields()[i][wiersz].getSymbol() != znak) {
                 result = false;
             }
         }
@@ -71,8 +71,8 @@ public class Rules {
 
     public boolean checkWinInFirstSlant(char znak) {
         boolean result = true;
-        for (int i = 0; i < board.fields.length; i++) {
-            if (board.fields[i][i].getSymbol() != znak) {
+        for (int i = 0; i < board.getFields().length; i++) {
+            if (board.getFields()[i][i].getSymbol() != znak) {
                 result = false;
             }
 
@@ -84,8 +84,8 @@ public class Rules {
 
     public boolean checkWinInSecondSlant(char znak) {
         boolean result = true;
-        for (int i = 0, j = board.fields.length - 1; i < board.fields.length; i++, j--) {
-            if (board.fields[i][j].getSymbol() != znak) {
+        for (int i = 0, j = board.getFields().length - 1; i < board.getFields().length; i++, j--) {
+            if (board.getFields()[i][j].getSymbol() != znak) {
                 result = false;
             }
         }
@@ -103,6 +103,6 @@ public class Rules {
 
     public double getMaxNumberMoves() {
 
-        return Math.pow(board.fields.length, 2) + 1;
+        return Math.pow(board.getFields().length, 2) + 1;
     }
 }
