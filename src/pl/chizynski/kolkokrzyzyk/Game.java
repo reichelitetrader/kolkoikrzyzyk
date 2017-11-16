@@ -167,4 +167,19 @@ public class Game {
     public void setNumerRuchu(int numerRuchu){
         this.numerRuchu = numerRuchu;
     }
+    
+    public Board getBoard(){
+        return board;
+    }
+    
+    public void setBoard(Board board){
+        this.board = board;
+    }
+    
+    public Rules getRules(){
+        return rules;
+    }
+    public void setRules(Rules rules){
+        this.rules = rules;
+    }
 }
