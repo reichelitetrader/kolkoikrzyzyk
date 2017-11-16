@@ -12,9 +12,9 @@ public class GumokuRules extends Rules {
     public boolean checkWinInRow(char znak, int wiersz) {
         boolean result = false;
         int amount_of_exist = 0;
-        for (int i = 0; i < board.getFields()[wiersz].length; i++) {
+        for (int i = 0; i < getBoard().getFields()[wiersz].length; i++) {
             // System.out.println("["+wiersz+"]["+i+"]"); 
-            if (board.getFields()[i][wiersz].getSymbol() == znak) {
+            if (getBoard().getFields()[i][wiersz].getSymbol() == znak) {
                 amount_of_exist++;
             } else {
                 amount_of_exist = 0;
@@ -30,9 +30,9 @@ public class GumokuRules extends Rules {
     public boolean checkWinInColumn(char znak, int kolumna) {
         boolean result = false;
         int amount_of_exist = 0;
-        for (int i = 0; i < board.getFields()[kolumna].length; i++) {
+        for (int i = 0; i < getBoard().getFields()[kolumna].length; i++) {
             //   System.out.println("["+kolumna+"]["+i+"]"); 
-            if (board.getFields()[kolumna][i].getSymbol() == znak) {
+            if (getBoard().getFields()[kolumna][i].getSymbol() == znak) {
 
                 amount_of_exist++;
 
@@ -51,8 +51,8 @@ public class GumokuRules extends Rules {
     public boolean checkWinInFirstSlant(char znak) {
         boolean result = false;
         int amount_of_exist = 0;
-        for (int i = 0; i < board.getFields().length; i++) {
-            if (board.getFields()[i][i].getSymbol() == znak) {
+        for (int i = 0; i < getBoard().getFields().length; i++) {
+            if (getBoard().getFields()[i][i].getSymbol() == znak) {
                 amount_of_exist++;
             }else{
                 amount_of_exist =0;
@@ -68,8 +68,8 @@ public class GumokuRules extends Rules {
     public boolean checkWinInSecondSlant(char znak) {
         boolean result = false;
         int amount_of_exist = 0;
-        for (int i = 0, j = board.getFields().length - 1; i < board.getFields().length; i++, j--) {
-            if (board.getFields()[i][j].getSymbol() == znak) {
+        for (int i = 0, j = getBoard().getFields().length - 1; i < getBoard().getFields().length; i++, j--) {
+            if (getBoard().getFields()[i][j].getSymbol() == znak) {
                 amount_of_exist++;
             }else{
                 amount_of_exist = 0;

@@ -5,7 +5,7 @@ import pl.chizynski.kolkokrzyzyk.boards.Board;
 
 public class Rules {
 
-    public Board board = null;
+    private Board board = null;
 
     public Rules(Board board) {  //powiazac zeby rules wiedzialo na ktorym board pracowac
         this.board = board;
@@ -104,5 +104,12 @@ public class Rules {
     public double getMaxNumberMoves() {
 
         return Math.pow(board.getFields().length, 2) + 1;
+    }
+    
+    public Board getBoard(){
+        return board;
+    }
+    public void setBoard(Board board){
+        this.board = board;
     }
 }
