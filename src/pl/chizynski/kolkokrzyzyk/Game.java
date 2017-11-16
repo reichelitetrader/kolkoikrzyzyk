@@ -15,9 +15,12 @@ public class Game {
 
     public static Figure kolko = FigureFactory.createFigure('O');
     public static Figure krzyzyk = FigureFactory.createFigure('X');
-    public int numerRuchu = 1;
-    Board board = null;
-    Rules rules = null;
+    private int numerRuchu = 1;
+    private Board board = null;
+    private Rules rules = null;
+    
+    
+    
 
     Player playerA;
     Player playerB;
@@ -156,5 +159,12 @@ public class Game {
         }
 
     }
+    
+    public int getNumerRuchu(){
+        return numerRuchu;
+    }
 
+    public void setNumerRuchu(int numerRuchu){
+        this.numerRuchu = numerRuchu;
+    }
 }
