@@ -15,9 +15,8 @@ public class Game {
 
     public static Figure kolko = FigureFactory.createFigure('O');
     public static Figure krzyzyk = FigureFactory.createFigure('X');
-    public static int numerRuchu = 1;
-    Board board = new Board(3);
-
+    public int numerRuchu = 1;
+    Board board = null;
     Rules rules = null;
 
     Player playerA;
@@ -108,7 +107,7 @@ public class Game {
         System.out.println("Wybierz wielkosc planszy M [3x3]  D [5x5] BD [7x7] GUMOKU [13x13]:");
         boardSizeInString = scanner.nextLine();
 
-        board = BoardFactory.createBoard(boardSizeInString);
+        board = BoardFactory.createBoard(boardSizeInString, this);//wskazanmie na obiekto w ktorym jestrem
 
         rules = RulesFactory.createRules(boardSizeInString, board);
 

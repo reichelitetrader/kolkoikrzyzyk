@@ -1,18 +1,21 @@
 package pl.chizynski.kolkokrzyzyk.boards;
 
+import pl.chizynski.kolkokrzyzyk.Game;
 import pl.chizynski.kolkokrzyzyk.figures.Figure;
 import pl.chizynski.kolkokrzyzyk.figures.FigureFactory;
-import pl.chizynski.kolkokrzyzyk.figures.Kolko;
-import pl.chizynski.kolkokrzyzyk.figures.Krzyzyk;
+
 
 public class Board {
 
+    public Game game = new Game();
     public static Figure puste = new Figure();
     public Figure[][] fields = new Figure[3][3];
     public static Figure kolko = FigureFactory.createFigure('O');
     public static Figure krzyzyk = FigureFactory.createFigure('X');
+    
 
-    public Board(int size) {
+    public Board(int size, Game game) {
+        this.game = game;     //referencja do game
         this.fields = new Figure[size][size];
         this.setInitialState();
     }
