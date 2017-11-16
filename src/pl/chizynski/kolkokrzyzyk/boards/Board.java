@@ -7,7 +7,7 @@ import pl.chizynski.kolkokrzyzyk.figures.FigureFactory;
 
 public class Board {
 
-    public Game game = new Game();
+    private Game game = new Game();
     public static Figure puste = new Figure();
     public Figure[][] fields = new Figure[3][3];
     public static Figure kolko = FigureFactory.createFigure('O');
@@ -38,5 +38,12 @@ public class Board {
             }
             System.out.println("");
         }
+    }
+    
+    public Game getGame(){
+        return game;
+    }
+    public void setGame(Game game){
+        this.game = game;
     }
 }

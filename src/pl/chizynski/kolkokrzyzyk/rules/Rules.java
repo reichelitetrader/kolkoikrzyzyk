@@ -97,7 +97,7 @@ public class Rules {
 
     public boolean checkDraw() {
 
-        return board.game.getNumerRuchu() == getMaxNumberMoves() && !checkWin(Game.kolko.getSymbol()) && !checkWin(Game.krzyzyk.getSymbol());
+        return board.getGame().getNumerRuchu()  == getMaxNumberMoves() && !checkWin(Game.kolko.getSymbol()) && !checkWin(Game.krzyzyk.getSymbol());
 
     }
 
