@@ -18,9 +18,9 @@ public class Computer extends Player {
             if (Board.EMPTY == board.getFields()[x][y]) {
                 if (numerRuchu % 2 != 0) {
                     if (Board.CROSS.getSymbol() == wynik) {
-                        board.getFields()[x][y] = FigureFactory.createFigure('X');
+                        board.getFields()[x][y] = Board.CROSS;
                     } else {
-                        board.getFields()[x][y] = FigureFactory.createFigure('O');
+                        board.getFields()[x][y] = Board.CIRCLE;
                     }
 
                 } else if (numerRuchu % 2 == 0) {
