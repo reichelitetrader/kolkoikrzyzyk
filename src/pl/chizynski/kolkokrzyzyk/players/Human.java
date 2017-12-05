@@ -44,19 +44,19 @@ public class Human extends Player {
         }
 
         try {
-            if (Board.puste == this.board.getFields()[wiersz][kolumna]) {
+            if (Board.EMPTY == this.board.getFields()[wiersz][kolumna]) {
 
                 if (numerRuchu % 2 != 0) {
-                    if (Board.kolko.getSymbol() == wynik) {
+                    if (Board.CIRCLE.getSymbol() == wynik) {
                         board.getFields()[wiersz][kolumna] = FigureFactory.createFigure('O');
                     } else {
                         board.getFields()[wiersz][kolumna] = FigureFactory.createFigure('X');
                     }
                 } else if (numerRuchu % 2 == 0) {
-                    if (wynik == Board.kolko.getSymbol()) {
-                        board.getFields()[wiersz][kolumna] = Board.krzyzyk;
-                    } else if (wynik == Board.krzyzyk.getSymbol()) {
-                        board.getFields()[wiersz][kolumna] = Board.kolko;
+                    if (wynik == Board.CIRCLE.getSymbol()) {
+                        board.getFields()[wiersz][kolumna] = Board.CROSS;
+                    } else if (wynik == Board.CROSS.getSymbol()) {
+                        board.getFields()[wiersz][kolumna] = Board.CIRCLE;
                     }
                 }
             } else {

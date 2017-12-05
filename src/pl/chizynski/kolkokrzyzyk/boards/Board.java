@@ -8,10 +8,11 @@ import pl.chizynski.kolkokrzyzyk.figures.FigureFactory;
 public class Board {
 
     private Game game = new Game();
-    public static Figure puste = new Figure();
     private Figure[][] fields = new Figure[3][3];
-    public static Figure kolko = FigureFactory.createFigure('O');
-    public static Figure krzyzyk = FigureFactory.createFigure('X');
+    
+    public static final Figure EMPTY = FigureFactory.createFigure(' ');
+    public static final Figure CIRCLE = FigureFactory.createFigure('O');
+    public static final Figure CROSS = FigureFactory.createFigure('X');
     
 
     public Board(int size, Game game) {
@@ -23,7 +24,7 @@ public class Board {
     public void setInitialState() {
         for (int i = 0; i < this.fields.length; i++) {
             for (int j = 0; j < this.fields[i].length; j++) {
-                this.fields[i][j] = puste;
+                this.fields[i][j] = EMPTY;
             }
         }
     }

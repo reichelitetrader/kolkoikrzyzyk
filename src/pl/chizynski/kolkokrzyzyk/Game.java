@@ -13,8 +13,7 @@ import pl.chizynski.kolkokrzyzyk.rules.RulesFactory;
 
 public class Game {
 
-    public static Figure kolko = FigureFactory.createFigure('O');
-    public static Figure krzyzyk = FigureFactory.createFigure('X');
+   
     private int numerRuchu = 1;
     private Board board = null;
     private Rules rules = null;
@@ -124,11 +123,11 @@ public class Game {
             System.out.println("kolejna tura:");
             board.displayState();
 
-            if (rules.checkWin(krzyzyk.getSymbol())) {
+            if (rules.checkWin(Board.CROSS.getSymbol())) {
                 endofgame = true;
                 System.out.println("wygrywa X:");
             }
-            if (rules.checkWin(kolko.getSymbol())) {
+            if (rules.checkWin(Board.CIRCLE.getSymbol())) {
                 endofgame = true;
                 System.out.println("wygrywa O:");
 
