@@ -13,7 +13,7 @@ public class Computer extends Player {
     public boolean move(int numerRuchu, char wynik) {
 
         while (true) {
-            int x = (int) Math.floor(Math.random() * this.board.getFields().length);
+            int x = (int) Math.floor(Math.random() * board.getFields().length);
             int y = (int) Math.floor(Math.random() * board.getFields().length);
             if (Board.EMPTY == board.getFields()[x][y]) {
                 if (numerRuchu % 2 != 0) {
