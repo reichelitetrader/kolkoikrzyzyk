@@ -13,8 +13,9 @@ public class Computer extends Player {
     public boolean move(int numerRuchu, char wynik) {
 
         while (true) {
-            int x = (int) Math.floor(Math.random() * board.getFields().length);
-            int y = (int) Math.floor(Math.random() * board.getFields().length);
+            int x = randomaise();
+            int y = randomaise();
+            
             if (Board.EMPTY == board.getFields()[x][y]) {
                 if (numerRuchu % 2 != 0) {
                     if (Board.CROSS.getSymbol() == wynik) {
@@ -36,4 +37,9 @@ public class Computer extends Player {
         return true;
     }
 
+    public int randomaise() {
+
+        int x = (int) Math.floor(Math.random() * board.getFields().length);
+        return x;
+    }
 }
