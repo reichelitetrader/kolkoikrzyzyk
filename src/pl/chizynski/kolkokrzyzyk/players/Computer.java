@@ -13,7 +13,8 @@ public class Computer extends Player {
         super(board);
     }
 
-    public boolean wykonaj_ruch(int numerRuchu, char wynik) {
+    @Override
+    public boolean move(int numerRuchu, char wynik) {
 
         while (true) {
             int x = (int) Math.floor(Math.random() * this.board.getFields().length);

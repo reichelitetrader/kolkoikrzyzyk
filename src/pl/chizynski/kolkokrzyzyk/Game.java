@@ -151,7 +151,7 @@ public class Game {
 
             if (!endofgame) {
                 switchActivePlayer();
-                value = activePlayer.wykonaj_ruch(numerRuchu, wynik);
+                value = activePlayer.move(numerRuchu, wynik);
 
                 nextTurn(value);
             }

@@ -12,6 +12,6 @@ public abstract class Player  {
         this.board = board;
     }
     
-    public abstract boolean wykonaj_ruch(int numerRuchu, char wynik);
+    public abstract boolean move(int numerRuchu, char wynik);
    
 }

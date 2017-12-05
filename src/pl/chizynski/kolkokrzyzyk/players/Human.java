@@ -15,7 +15,7 @@ public class Human extends Player {
     }
 
     @Override
-    public boolean wykonaj_ruch(int numerRuchu, char wynik) {
+    public boolean move(int numerRuchu, char wynik) {
         int wiersz = 0;
         int kolumna = 0;
         boolean value = true;
