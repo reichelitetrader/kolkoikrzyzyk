@@ -1,10 +1,6 @@
 package pl.chizynski.kolkokrzyzyk.players;
 
 import pl.chizynski.kolkokrzyzyk.boards.Board;
-import static pl.chizynski.kolkokrzyzyk.Game.scanner;
-import pl.chizynski.kolkokrzyzyk.players.Computer;
-import pl.chizynski.kolkokrzyzyk.players.Human;
-import pl.chizynski.kolkokrzyzyk.players.Player;
 
 public class PlayerFactory {
 

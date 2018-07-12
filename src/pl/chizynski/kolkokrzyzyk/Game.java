@@ -29,8 +29,8 @@ public class Game {
 
     public static void main(String[] args) {
         Game game = new Game();
+        Window window = new Window(game);
         game.startGame();
-
     }
 
     public static Scanner scanner = new Scanner(System.in);
