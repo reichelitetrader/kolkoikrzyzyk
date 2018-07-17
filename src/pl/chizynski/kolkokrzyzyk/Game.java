@@ -5,22 +5,16 @@ import java.util.Scanner;
 import pl.chizynski.kolkokrzyzyk.boards.Board;
 import pl.chizynski.kolkokrzyzyk.boards.BoardFactory;
 import pl.chizynski.kolkokrzyzyk.players.PlayerFactory;
-import pl.chizynski.kolkokrzyzyk.figures.Figure;
-import pl.chizynski.kolkokrzyzyk.figures.FigureFactory;
 import pl.chizynski.kolkokrzyzyk.players.Player;
 import pl.chizynski.kolkokrzyzyk.rules.Rules;
 import pl.chizynski.kolkokrzyzyk.rules.RulesFactory;
 
 public class Game {
 
-   
     private int numerRuchu = 1;
     private Board board = null;
     private Rules rules = null;
-    
-    
-    
-
+  
     Player playerA;
     Player playerB;
     Player activePlayer;
@@ -32,7 +26,6 @@ public class Game {
         Window window = new Window(game);
         game.startGame();
     }
-
     public static Scanner scanner = new Scanner(System.in);
 
     public char wybierz_znak() {

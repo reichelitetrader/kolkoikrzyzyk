@@ -1,12 +1,10 @@
 package pl.chizynski.kolkokrzyzyk.boards;
-
 import pl.chizynski.kolkokrzyzyk.Game;
 import pl.chizynski.kolkokrzyzyk.figures.Figure;
 import pl.chizynski.kolkokrzyzyk.figures.FigureFactory;
 
 
 public class Board {
-
     private Game game = new Game();
     private Figure[][] fields = new Figure[3][3];
     
@@ -14,7 +12,6 @@ public class Board {
     public static final Figure CIRCLE = FigureFactory.createFigure('O');
     public static final Figure CROSS = FigureFactory.createFigure('X');
     
-
     public Board(int size, Game game) {
         this.game = game;     //referencja do game
         this.fields = new Figure[size][size];
@@ -47,12 +44,10 @@ public class Board {
     public void setGame(Game game){
         this.game = game;
     }
-    
     public Figure[][] getFields(){
         return fields;
     }
     public void setFields(Figure[][] fields){
-        this.fields = fields;
-        
+        this.fields = fields;  
     }
 }

@@ -1,5 +1,4 @@
 package pl.chizynski.kolkokrzyzyk;
-
 import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
