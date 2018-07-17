@@ -35,6 +35,7 @@ public class Window extends JFrame {
 //        });
         //Add buttons to experiment with Grid Layout
         button1.addActionListener((e)->{     //lambda funkcja anonimowa do interfejsu funkcyjnego
+            
             this.game.getBoard().getFields()[0][0] = Board.CROSS;
             this.game.getBoard().displayState();
         }); 

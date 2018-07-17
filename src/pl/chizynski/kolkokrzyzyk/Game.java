@@ -28,7 +28,7 @@ public class Game {
     }
     public static Scanner scanner = new Scanner(System.in);
 
-    public char wybierz_znak() {
+    public char wybierzKtoZaczyna() {
         String wybor = "";
         wybor = scanner.nextLine();
         if (wybor.equals("O")) {
@@ -108,7 +108,7 @@ public class Game {
 
         //TODO: Tworzy nowa plansze ale nie wyswietla stanow;
         System.out.println("wybierz kto zaczyna?:");
-        wynik = wybierz_znak();
+        wynik = wybierzKtoZaczyna();
         playerA = choice_player("wybor gracza1 [K/C]:");
         playerB = choice_player("wybor gracza2 [K/C]:");
 

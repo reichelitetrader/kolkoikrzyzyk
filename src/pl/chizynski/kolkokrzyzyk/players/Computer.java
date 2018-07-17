@@ -10,24 +10,24 @@ public class Computer extends Player {
     }
 
     @Override
-    public boolean move(int numerRuchu, char wynik) {
+    public boolean move(int turnNumber, char figure) {
 
         while (true) {
             int x = randomaise();
             int y = randomaise();
             
             if (Board.EMPTY == board.getFields()[x][y]) {
-                if (numerRuchu % 2 != 0) {
-                    if (Board.CROSS.getSymbol() == wynik) {
+                if (turnNumber % 2 != 0) {
+                    if (Board.CROSS.getSymbol() == figure) {
                         board.getFields()[x][y] = Board.CROSS;
                     } else {
                         board.getFields()[x][y] = Board.CIRCLE;
                     }
 
-                } else if (numerRuchu % 2 == 0) {
-                    if (wynik == Board.CIRCLE.getSymbol()) {
+                } else if (turnNumber % 2 == 0) {
+                    if (figure == Board.CIRCLE.getSymbol()) {
                         board.getFields()[x][y] = Board.CROSS;
-                    } else if (wynik == Board.CROSS.getSymbol()) {
+                    } else if (figure == Board.CROSS.getSymbol()) {
                         board.getFields()[x][y] = Board.CIRCLE;
                     }
                 }

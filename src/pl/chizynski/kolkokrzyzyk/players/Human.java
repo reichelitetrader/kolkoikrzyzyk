@@ -15,7 +15,7 @@ public class Human extends Player {
     }
 
     @Override
-    public boolean move(int numerRuchu, char wynik) {
+    public boolean move(int turnNumber, char figure) {
         int wiersz = 0;
         int kolumna = 0;
         boolean value = true;
@@ -46,16 +46,16 @@ public class Human extends Player {
         try {
             if (Board.EMPTY == this.board.getFields()[wiersz][kolumna]) {
 
-                if (numerRuchu % 2 != 0) {
-                    if (Board.CIRCLE.getSymbol() == wynik) {
+                if (turnNumber % 2 != 0) {
+                    if (Board.CIRCLE.getSymbol() == figure) {
                         board.getFields()[wiersz][kolumna] = FigureFactory.createFigure('O');
                     } else {
                         board.getFields()[wiersz][kolumna] = FigureFactory.createFigure('X');
                     }
-                } else if (numerRuchu % 2 == 0) {
-                    if (wynik == Board.CIRCLE.getSymbol()) {
+                } else if (turnNumber % 2 == 0) {
+                    if (figure == Board.CIRCLE.getSymbol()) {
                         board.getFields()[wiersz][kolumna] = Board.CROSS;
-                    } else if (wynik == Board.CROSS.getSymbol()) {
+                    } else if (figure == Board.CROSS.getSymbol()) {
                         board.getFields()[wiersz][kolumna] = Board.CIRCLE;
                     }
                 }
