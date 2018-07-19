@@ -6,7 +6,7 @@ import pl.chizynski.kolkokrzyzyk.figures.FigureFactory;
 
 public class Human extends Player {
 
-    public static Scanner scanner = new Scanner(System.in);
+    private static Scanner scanner = new Scanner(System.in);
 
     public Human(Board board) {
         super(board);
@@ -43,12 +43,12 @@ public class Human extends Player {
         }
 
         try {
-            if (Board.EMPTY == this.board.getFields()[wiersz][kolumna]) {
+            if (Board.EMPTY == this.getBoard().getFields()[wiersz][kolumna]) {
 
                 if (turnNumber % 2 != 0) {
-                    board.getFields()[wiersz][kolumna] = Board.CROSS;
+                    this.getBoard().getFields()[wiersz][kolumna] = Board.CROSS;
                 } else if (turnNumber % 2 == 0) {
-                    board.getFields()[wiersz][kolumna] = Board.CROSS;
+                    this.getBoard().getFields()[wiersz][kolumna] = Board.CROSS;
                 }
             } else {
                 System.out.println("to pole jest zajete wybierz inne:");

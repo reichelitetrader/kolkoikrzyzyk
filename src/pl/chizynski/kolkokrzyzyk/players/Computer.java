@@ -16,19 +16,19 @@ public class Computer extends Player {
             int x = randomaise();
             int y = randomaise();
             
-            if (Board.EMPTY == board.getFields()[x][y]) {
+            if (Board.EMPTY == this.getBoard().getFields()[x][y]) {
                 if (turnNumber % 2 != 0) {
                     if (Board.CROSS.getSymbol() == figure) {
-                        board.getFields()[x][y] = Board.CROSS;
+                        this.getBoard().getFields()[x][y] = Board.CROSS;
                     } else {
-                        board.getFields()[x][y] = Board.CIRCLE;
+                        this.getBoard().getFields()[x][y] = Board.CIRCLE;
                     }
 
                 } else if (turnNumber % 2 == 0) {
                     if (figure == Board.CIRCLE.getSymbol()) {
-                        board.getFields()[x][y] = Board.CROSS;
+                        this.getBoard().getFields()[x][y] = Board.CROSS;
                     } else if (figure == Board.CROSS.getSymbol()) {
-                        board.getFields()[x][y] = Board.CIRCLE;
+                        this.getBoard().getFields()[x][y] = Board.CIRCLE;
                     }
                 }
                 break;
@@ -39,7 +39,7 @@ public class Computer extends Player {
 
     public int randomaise() {
 
-        int x = (int) Math.floor(Math.random() * board.getFields().length);
+        int x = (int) Math.floor(Math.random() * this.getBoard().getFields().length);
         return x;
     }
 }

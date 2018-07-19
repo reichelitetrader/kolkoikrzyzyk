@@ -5,7 +5,7 @@ import pl.chizynski.kolkokrzyzyk.boards.Board;
 
 public abstract class Player  {
 
-    public Board board;
+    private Board board;
 
     
     public Player(Board board){
@@ -13,5 +13,19 @@ public abstract class Player  {
     }
     
     public abstract boolean move(int turnNumber, char figure);
+
+    /**
+     * @return the board
+     */
+    public Board getBoard() {
+        return board;
+    }
+
+    /**
+     * @param board the board to set
+     */
+    public void setBoard(Board board) {
+        this.board = board;
+    }
    
 }
