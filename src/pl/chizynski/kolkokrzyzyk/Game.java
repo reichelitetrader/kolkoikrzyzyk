@@ -14,21 +14,19 @@ public class Game {
     private int numerRuchu = 1;
     private Board board = null;
     private Rules rules = null;
-  
-    Player playerA;
-    Player playerB;
-    Player activePlayer;
-
-    char wynik = 0;
-
+    private Player playerA;
+    private Player playerB;
+    private Player activePlayer;
+    private char figure = 0;
+    private static Scanner scanner = new Scanner(System.in);
+    
     public static void main(String[] args) {
         Game game = new Game();
         Window window = new Window(game);
         game.startGame();
     }
-    public static Scanner scanner = new Scanner(System.in);
 
-    public char wybierzKtoZaczyna() {
+    public char whoStarts() {
         String wybor = "";
         wybor = scanner.nextLine();
         if (wybor.equals("O")) {
@@ -39,10 +37,10 @@ public class Game {
             System.out.println("zaczyna krzyzyk:");
             return wybor.charAt(0);
         }
-        return wynik;
+        return figure;
     }
 
-    public Player choice_player(String message) {
+    public Player createPlayer(String message) {
 
         String wybor = "";
         Player player = null;
@@ -108,9 +106,9 @@ public class Game {
 
         //TODO: Tworzy nowa plansze ale nie wyswietla stanow;
         System.out.println("wybierz kto zaczyna?:");
-        wynik = wybierzKtoZaczyna();
-        playerA = choice_player("wybor gracza1 [K/C]:");
-        playerB = choice_player("wybor gracza2 [K/C]:");
+        figure = whoStarts();
+        playerA = createPlayer("wybor gracza1 [K/C]:");
+        playerB = createPlayer("wybor gracza2 [K/C]:");
 
         while (true) {
             System.out.println("kolejna tura:");
@@ -143,7 +141,7 @@ public class Game {
 
             if (!endofgame) {
                 switchActivePlayer();
-                value = activePlayer.move(numerRuchu, wynik);
+                value = activePlayer.move(numerRuchu, figure);
 
                 nextTurn(value);
             }

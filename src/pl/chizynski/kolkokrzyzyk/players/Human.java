@@ -4,7 +4,6 @@ import java.util.Scanner;
 import pl.chizynski.kolkokrzyzyk.boards.Board;
 import pl.chizynski.kolkokrzyzyk.figures.FigureFactory;
 
-
 public class Human extends Player {
 
     public static Scanner scanner = new Scanner(System.in);
@@ -47,17 +46,9 @@ public class Human extends Player {
             if (Board.EMPTY == this.board.getFields()[wiersz][kolumna]) {
 
                 if (turnNumber % 2 != 0) {
-                    if (Board.CIRCLE.getSymbol() == figure) {
-                        board.getFields()[wiersz][kolumna] = FigureFactory.createFigure('O');
-                    } else {
-                        board.getFields()[wiersz][kolumna] = FigureFactory.createFigure('X');
-                    }
+                    board.getFields()[wiersz][kolumna] = Board.CROSS;
                 } else if (turnNumber % 2 == 0) {
-                    if (figure == Board.CIRCLE.getSymbol()) {
-                        board.getFields()[wiersz][kolumna] = Board.CROSS;
-                    } else if (figure == Board.CROSS.getSymbol()) {
-                        board.getFields()[wiersz][kolumna] = Board.CIRCLE;
-                    }
+                    board.getFields()[wiersz][kolumna] = Board.CROSS;
                 }
             } else {
                 System.out.println("to pole jest zajete wybierz inne:");
@@ -68,7 +59,7 @@ public class Human extends Player {
             System.out.println("wyszedles poza zakres:");
             value = false;
         }
-       return value; 
+        return value;
     }
 
 }
