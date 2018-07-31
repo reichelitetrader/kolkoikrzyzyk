@@ -14,7 +14,7 @@ public class Human extends Player {
     }
 
     @Override
-    public boolean move(int turnNumber, char figure) {
+    public boolean move(int turnNumber) {
         int wiersz = 0;
         int kolumna = 0;
         boolean value = true;
@@ -44,11 +44,10 @@ public class Human extends Player {
 
         try {
             if (Board.EMPTY == this.getBoard().getFields()[wiersz][kolumna]) {
-
                 if (turnNumber % 2 != 0) {
                     this.getBoard().getFields()[wiersz][kolumna] = Board.CROSS;
                 } else if (turnNumber % 2 == 0) {
-                    this.getBoard().getFields()[wiersz][kolumna] = Board.CROSS;
+                    this.getBoard().getFields()[wiersz][kolumna] = Board.CIRCLE;
                 }
             } else {
                 System.out.println("to pole jest zajete wybierz inne:");

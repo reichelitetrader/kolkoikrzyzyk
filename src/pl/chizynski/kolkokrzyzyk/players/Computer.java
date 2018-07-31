@@ -10,7 +10,7 @@ public class Computer extends Player {
     }
 
     @Override
-    public boolean move(int turnNumber, char figure) {
+    public boolean move(int turnNumber) {
 
         while (true) {
             int x = randomaise();
@@ -18,23 +18,15 @@ public class Computer extends Player {
             
             if (Board.EMPTY == this.getBoard().getFields()[x][y]) {
                 if (turnNumber % 2 != 0) {
-                    if (Board.CROSS.getSymbol() == figure) {
                         this.getBoard().getFields()[x][y] = Board.CROSS;
-                    } else {
-                        this.getBoard().getFields()[x][y] = Board.CIRCLE;
-                    }
-
                 } else if (turnNumber % 2 == 0) {
-                    if (figure == Board.CIRCLE.getSymbol()) {
-                        this.getBoard().getFields()[x][y] = Board.CROSS;
-                    } else if (figure == Board.CROSS.getSymbol()) {
                         this.getBoard().getFields()[x][y] = Board.CIRCLE;
-                    }
-                }
+                    } 
                 break;
             }
         }
         return true;
+        
     }
 
     public int randomaise() {

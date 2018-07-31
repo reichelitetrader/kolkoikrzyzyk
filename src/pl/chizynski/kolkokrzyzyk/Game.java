@@ -141,7 +141,7 @@ public class Game {
 
             if (!endofgame) {
                 switchActivePlayer();
-                value = activePlayer.move(numerRuchu, figure);
+                value = activePlayer.move(numerRuchu);
 
                 nextTurn(value);
             }

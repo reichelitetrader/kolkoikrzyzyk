@@ -12,7 +12,7 @@ public abstract class Player  {
         this.board = board;
     }
     
-    public abstract boolean move(int turnNumber, char figure);
+    public abstract boolean move(int turnNumber);
 
     /**
      * @return the board
