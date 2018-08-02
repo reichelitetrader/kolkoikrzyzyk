@@ -1,10 +1,13 @@
 package pl.chizynski.kolkokrzyzyk;
 
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import pl.chizynski.kolkokrzyzyk.boards.Board;
+import pl.chizynski.kolkokrzyzyk.figures.Figure;
 
 public class Window extends JFrame {
 
@@ -20,17 +23,13 @@ public class Window extends JFrame {
         final JPanel compsToExperiment = new JPanel();
         compsToExperiment.setLayout(new GridLayout(3, 3));
         JPanel controls = new JPanel();
-     
 
         JButton[][] buttons = new JButton[3][3];
         for (int i = 0; i < buttons.length; i++) {
             for (int j = 0; j < buttons[i].length; j++) {
                 buttons[i][j] = new JButton("X");
                 compsToExperiment.add(buttons[i][j]);
-                buttons[i][j].addActionListener((e) -> {
-                    this.game.getBoard().getFields()[0][0] = Board.CROSS;
-                    this.game.getBoard().displayState();
-                });
+                buttons[i][j].addActionListener(new CustomActionListener(game, i, j));
 
             }
 
@@ -45,6 +44,29 @@ public class Window extends JFrame {
             frame.getContentPane().add(compsToExperiment);
             frame.setVisible(true);// pokazanie okna 
             frame.pack(); //spakowanie okna 
+
         }
     }
+}
+
+class CustomActionListener implements ActionListener {
+
+    private Game game = null;
+    int i = 0;
+    int j = 0;
+
+    public CustomActionListener(Game game, int i, int j) {
+        this.game = game;
+        this.j = j;
+        this.i = i;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        Board board = this.game.getBoard();
+        Figure[][] fields = board.getFields();
+        fields[i][j] = Board.CROSS;
+        this.game.getBoard().displayState();
+    }
+
 }
