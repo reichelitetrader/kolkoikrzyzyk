@@ -19,10 +19,14 @@ public class Game {
     private Player activePlayer;
     private char figure = 0;
     private static Scanner scanner = new Scanner(System.in);
-    
+    private Window window = null;
+
+    public Game() {
+        this.window = new Window(this);
+    }
+
     public static void main(String[] args) {
         Game game = new Game();
-        Window window = new Window(game);
         game.startGame();
     }
 
@@ -149,27 +153,28 @@ public class Game {
         }
 
     }
-    
-    public int getNumerRuchu(){
+
+    public int getNumerRuchu() {
         return numerRuchu;
     }
 
-    public void setNumerRuchu(int numerRuchu){
+    public void setNumerRuchu(int numerRuchu) {
         this.numerRuchu = numerRuchu;
     }
-    
-    public Board getBoard(){
+
+    public Board getBoard() {
         return board;
     }
-    
-    public void setBoard(Board board){
+
+    public void setBoard(Board board) {
         this.board = board;
     }
-    
-    public Rules getRules(){
+
+    public Rules getRules() {
         return rules;
     }
-    public void setRules(Rules rules){
+
+    public void setRules(Rules rules) {
         this.rules = rules;
     }
 }
