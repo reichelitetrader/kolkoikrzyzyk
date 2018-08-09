@@ -154,6 +154,8 @@ public class Game {
         }
 
     }
+    
+    
 
     public int getNumerRuchu() {
         return numerRuchu;

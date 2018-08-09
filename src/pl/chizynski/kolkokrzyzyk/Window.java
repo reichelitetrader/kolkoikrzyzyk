@@ -63,9 +63,16 @@ class CustomActionListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+   
         Board board = this.game.getBoard();
         Figure[][] fields = board.getFields();
-        fields[i][j] = Board.CROSS;
+        if (this.game.getNumerRuchu() % 2 != 0) {
+            this.game.getBoard().getFields()[i][j] = Board.CROSS;
+            
+        } else if (this.game.getNumerRuchu() % 2 == 0) {
+            this.game.getBoard().getFields()[i][j] = Board.CIRCLE;
+        }
+        this.game.nextTurn(true);
         this.game.getBoard().displayState();
     }
 
