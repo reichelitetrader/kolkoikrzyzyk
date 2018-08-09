@@ -5,7 +5,7 @@ import pl.chizynski.kolkokrzyzyk.figures.FigureFactory;
 
 
 public class Board {
-    private Game game = new Game();
+    private Game game = null;
     private Figure[][] fields = new Figure[3][3];
     
     public static final Figure EMPTY = FigureFactory.createFigure(' ');

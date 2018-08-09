@@ -104,6 +104,7 @@ public class Game {
         System.out.println("Wybierz wielkosc planszy M [3x3]  D [5x5] BD [7x7] GUMOKU [13x13]:");
         boardSizeInString = scanner.nextLine();
 
+        
         board = BoardFactory.createBoard(boardSizeInString, this);//wskazanmie na obiekto w ktorym jestrem
 
         rules = RulesFactory.createRules(boardSizeInString, board);
