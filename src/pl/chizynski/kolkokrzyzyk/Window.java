@@ -12,7 +12,8 @@ import pl.chizynski.kolkokrzyzyk.figures.Figure;
 public class Window extends JFrame {
 
     private Game game = null;
- JButton[][] buttons = new JButton[3][3];
+    JButton[][] buttons = new JButton[3][3];
+
     public Window(Game game) {
 
         this.game = game;
@@ -24,14 +25,13 @@ public class Window extends JFrame {
         compsToExperiment.setLayout(new GridLayout(3, 3));
         JPanel controls = new JPanel();
 
-       
         for (int i = 0; i < buttons.length; i++) {
             for (int j = 0; j < buttons[i].length; j++) {
                 buttons[i][j] = new JButton(" ");
                 buttons[i][j].setText(" ");
-                
+
                 compsToExperiment.add(buttons[i][j]);
-                buttons[i][j].addActionListener(new CustomActionListener(game,this, i, j));
+                buttons[i][j].addActionListener(new CustomActionListener(game, this, i, j));
 
             }
 
@@ -58,27 +58,34 @@ class CustomActionListener implements ActionListener {
     int i = 0;
     int j = 0;
 
-    public CustomActionListener(Game game,Window window, int i, int j) {
+    public CustomActionListener(Game game, Window window, int i, int j) {
         this.game = game;
         this.window = window;
         this.j = j;
         this.i = i;
-        
-        
+
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-   
+
         Board board = this.game.getBoard();
         Figure[][] fields = board.getFields();
         if (this.game.getNumerRuchu() % 2 != 0) {
             this.game.getBoard().getFields()[i][j] = Board.CROSS;
             this.window.buttons[i][j].setText(String.valueOf(Board.CROSS.getSymbol()));
+            if (this.game.getRules().checkWin(Board.CROSS.getSymbol())) {
+                System.out.println("wygrywa X:");
+            }
+
         } else if (this.game.getNumerRuchu() % 2 == 0) {
             this.game.getBoard().getFields()[i][j] = Board.CIRCLE;
             this.window.buttons[i][j].setText(String.valueOf(Board.CIRCLE.getSymbol()));
+
+        } else if (this.game.getRules().checkWin(Board.CIRCLE.getSymbol())) {
+            System.out.println("wygrywa O:");
         }
+
         this.game.nextTurn(true);
         this.game.getBoard().displayState();
     }
