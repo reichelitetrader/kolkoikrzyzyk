@@ -57,6 +57,7 @@ public class Game {
 
     public void nextTurn(boolean value) {
         if (value == true) {
+            
             numerRuchu++;
         } else {
             System.out.println("brak zwiekszania tury:");
@@ -96,12 +97,14 @@ public class Game {
         //TODO: Tworzy nowa plansze ale nie wyswietla stanow;
         System.out.println("wybierz kto zaczyna?:");
         figure = whoStarts();
+        
         playerA = createPlayer("wybor gracza1 [K/C]:");
         playerB = createPlayer("wybor gracza2 [K/C]:");
 
         while (true) {
             System.out.println("kolejna tura:");
             board.displayState();
+            
             if (rules.checkWin(Board.CROSS.getSymbol())) {
                 endofgame = true;
                 System.out.println("wygrywa X:");
