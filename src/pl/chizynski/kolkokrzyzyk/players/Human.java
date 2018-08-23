@@ -10,9 +10,7 @@ public class Human extends Player {
 
     public Human(Board board) {
         super(board);
-
     }
-
     @Override
     public boolean move(int turnNumber) {
         int wiersz = 0;
@@ -53,12 +51,10 @@ public class Human extends Player {
                 System.out.println("to pole jest zajete wybierz inne:");
                 value = false;
             }
-
         } catch (ArrayIndexOutOfBoundsException exc) {
             System.out.println("wyszedles poza zakres:");
             value = false;
         }
         return value;
     }
-
 }

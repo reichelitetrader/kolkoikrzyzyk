@@ -1,9 +1,7 @@
 package pl.chizynski.kolkokrzyzyk.boards;
-
 import pl.chizynski.kolkokrzyzyk.Game;
 
 public class BoardFactory {
-
     public static Board createBoard(String boardSizeInString, Game game) {
         Board board = new Board(3, game);
         if (boardSizeInString.equals("M")) {
@@ -21,5 +19,4 @@ public class BoardFactory {
         }
         return board;
     }
-
 }

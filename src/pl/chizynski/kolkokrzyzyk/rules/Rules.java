@@ -1,14 +1,11 @@
 package pl.chizynski.kolkokrzyzyk.rules;
-
 import pl.chizynski.kolkokrzyzyk.boards.Board;
 
 public class Rules {
-
     private Board board = null;
 
     public Rules(Board board) {  //powiazac zeby rules wiedzialo na ktorym board pracowac
         this.board = board;
-
     }
 
     public boolean checkWin(char znak) {
@@ -16,14 +13,12 @@ public class Rules {
             if (checkWinInColumn(znak, i)) {
                 return true;
             }
-
         }
         for (int i = 0; i < board.getFields().length; i++) {
             if (checkWinInRow(znak, i)) {
                 return true;
             }
         }
-
         if (checkWinInSlant(znak)) {
             return true;
         }
@@ -36,7 +31,6 @@ public class Rules {
         for (int i = 0; i < board.getFields()[kolumna].length; i++) {
             //   System.out.println("["+kolumna+"]["+i+"]"); 
             if (board.getFields()[kolumna][i].getSymbol() != znak) {
-
                 result = false;
             }
         }
@@ -80,7 +74,6 @@ public class Rules {
             if (board.getFields()[i][i].getSymbol() != znak) {
                 result = false;
             }
-
         }
         return result;
     }//metoda sprawdza wygrana na 1 skosie
@@ -101,15 +94,12 @@ public class Rules {
     //@return zwraca wynik jesli wygra CROSS czy CIRCLE to true jesli nie false
 
     public boolean checkDraw() {
-
         return board.getGame().getNumerRuchu()  == getMaxNumberMoves()
                 && !checkWin(Board.CIRCLE.getSymbol()) 
                 && !checkWin(Board.CROSS.getSymbol());
-
     }
 
     public double getMaxNumberMoves() {
-
         return Math.pow(board.getFields().length, 2) + 1;
     }
     

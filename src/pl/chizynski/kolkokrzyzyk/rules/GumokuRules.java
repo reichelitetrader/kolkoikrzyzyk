@@ -1,5 +1,4 @@
 package pl.chizynski.kolkokrzyzyk.rules;
-
 import pl.chizynski.kolkokrzyzyk.boards.Board;
 
 public class GumokuRules extends Rules {
@@ -7,7 +6,6 @@ public class GumokuRules extends Rules {
     public GumokuRules(Board board) {
         super(board);
     }
-
     @Override
     public boolean checkWinInRow(char znak, int wiersz) {
         boolean result = false;
@@ -25,7 +23,6 @@ public class GumokuRules extends Rules {
         }
         return result;
     }
-
     @Override
     public boolean checkWinInColumn(char znak, int kolumna) {
         boolean result = false;
@@ -33,9 +30,7 @@ public class GumokuRules extends Rules {
         for (int i = 0; i < getBoard().getFields()[kolumna].length; i++) {
             //   System.out.println("["+kolumna+"]["+i+"]"); 
             if (getBoard().getFields()[kolumna][i].getSymbol() == znak) {
-
                 amount_of_exist++;
-
             } else {
                 amount_of_exist = 0;
             }
@@ -45,8 +40,6 @@ public class GumokuRules extends Rules {
         }
         return result;
     }
-    
-    
     @Override
     public boolean checkWinInFirstSlant(char znak) {
         boolean result = false;
@@ -63,7 +56,6 @@ public class GumokuRules extends Rules {
     }
         return result;
     }
-
     @Override
     public boolean checkWinInSecondSlant(char znak) {
         boolean result = false;
@@ -80,5 +72,4 @@ public class GumokuRules extends Rules {
         }
         return result;
     }
-
 }

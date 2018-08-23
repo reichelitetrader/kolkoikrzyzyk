@@ -1,7 +1,6 @@
 package pl.chizynski.kolkokrzyzyk.figures;
 
 public class FigureFactory {
-
     public static Figure createFigure(char symbol) {
         Figure figure = new Figure();
         if (symbol == 'O') {
@@ -11,5 +10,4 @@ public class FigureFactory {
         }
         return figure;
     }
-
 }

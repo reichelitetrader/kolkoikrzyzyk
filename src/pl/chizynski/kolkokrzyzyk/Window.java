@@ -15,7 +15,6 @@ public class Window extends JFrame {
     JButton[][] buttons = new JButton[3][3];
 
     public Window(Game game) {
-
         this.game = game;
         JFrame frame = this; //new JFrame("test"); //utworzenie okna ramowego z tytułem 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -29,12 +28,9 @@ public class Window extends JFrame {
             for (int j = 0; j < buttons[i].length; j++) {
                 buttons[i][j] = new JButton(" ");
                 buttons[i][j].setText(" ");
-
                 compsToExperiment.add(buttons[i][j]);
                 buttons[i][j].addActionListener(new CustomActionListener(game, this, i, j));
-
             }
-
 //        button1.addActionListener(new ActionListener(){ //klasa anomimowa,
 //            //jesli interfejs ma 1 metode to interfejs funkcyjny ze mozna go uzywac w programowaniu funkcyjnym
 //            @Override
@@ -46,7 +42,6 @@ public class Window extends JFrame {
             frame.getContentPane().add(compsToExperiment);
             frame.setVisible(true);// pokazanie okna 
             frame.pack(); //spakowanie okna 
-
         }
     }
 }
@@ -63,31 +58,26 @@ class CustomActionListener implements ActionListener {
         this.window = window;
         this.j = j;
         this.i = i;
-
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
         Board board = this.game.getBoard();
         Figure[][] fields = board.getFields();
         if (this.game.getNumerRuchu() % 2 != 0) {
             this.game.getBoard().getFields()[i][j] = Board.CROSS;
             this.window.buttons[i][j].setText(String.valueOf(Board.CROSS.getSymbol()));
-            if (this.game.getRules().checkWin(Board.CROSS.getSymbol())) {
-                System.out.println("wygrywa X:");
-            }
-
         } else if (this.game.getNumerRuchu() % 2 == 0) {
             this.game.getBoard().getFields()[i][j] = Board.CIRCLE;
             this.window.buttons[i][j].setText(String.valueOf(Board.CIRCLE.getSymbol()));
 
+        }
+        if (this.game.getRules().checkWin(Board.CROSS.getSymbol())) {
+            System.out.println("wygrywa X:");
         } else if (this.game.getRules().checkWin(Board.CIRCLE.getSymbol())) {
             System.out.println("wygrywa O:");
         }
-
         this.game.nextTurn(true);
         this.game.getBoard().displayState();
     }
-
 }

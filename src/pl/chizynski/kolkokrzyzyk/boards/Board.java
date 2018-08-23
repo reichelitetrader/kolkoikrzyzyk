@@ -3,7 +3,6 @@ import pl.chizynski.kolkokrzyzyk.Game;
 import pl.chizynski.kolkokrzyzyk.figures.Figure;
 import pl.chizynski.kolkokrzyzyk.figures.FigureFactory;
 
-
 public class Board {
     private Game game = null;
     private Figure[][] fields = new Figure[3][3];
@@ -28,7 +27,6 @@ public class Board {
 
     public void displayState() {
         System.out.println("ponizej stan planszy:");
-
         for (int i = 0; i < this.fields.length; i++) {
             System.out.print("|");
             for (int j = 0; j < this.fields[i].length; j++) {

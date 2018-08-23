@@ -1,4 +1,3 @@
-
 package pl.chizynski.kolkokrzyzyk.figures;
 
 public class Figure {
@@ -14,5 +13,4 @@ public class Figure {
     public void setSymbol(char symbol) {
         this.symbol = symbol;
     }
-   
 }

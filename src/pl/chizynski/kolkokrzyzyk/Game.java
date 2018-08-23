@@ -1,6 +1,4 @@
-//gra kółko i krzyżyk
 package pl.chizynski.kolkokrzyzyk;
-
 import java.util.Scanner;
 import pl.chizynski.kolkokrzyzyk.boards.Board;
 import pl.chizynski.kolkokrzyzyk.boards.BoardFactory;
@@ -10,7 +8,6 @@ import pl.chizynski.kolkokrzyzyk.rules.Rules;
 import pl.chizynski.kolkokrzyzyk.rules.RulesFactory;
 
 public class Game {
-
     private int numerRuchu = 1;
     private Board board = null;
     private Rules rules = null;
@@ -24,19 +21,16 @@ public class Game {
     public Game() {
         this.window = new Window(this);
     }
-
     public static void main(String[] args) {
         Game game = new Game();
         game.startGame();
     }
-
     public char whoStarts() {
         String wybor = "";
         wybor = scanner.nextLine();
         if (wybor.equals("O")) {
             System.out.println("zaczyna kolko:");
             return wybor.charAt(0);
-
         } else if (wybor.equals("X")) {
             System.out.println("zaczyna krzyzyk:");
             return wybor.charAt(0);
@@ -45,12 +39,10 @@ public class Game {
     }
 
     public Player createPlayer(String message) {
-
         String wybor = "";
         Player player = null;
         System.out.println(message);
         wybor = scanner.nextLine();
-
         player = PlayerFactory.createPlayer(message, board, wybor);
         return player;
     }
@@ -58,15 +50,12 @@ public class Game {
     public void switchActivePlayer() {
         if (numerRuchu % 2 != 0) {
             activePlayer = playerA;
-
         } else {
             activePlayer = playerB;
-
         }
     }
 
     public void nextTurn(boolean value) {
-
         if (value == true) {
             numerRuchu++;
         } else {
@@ -86,9 +75,7 @@ public class Game {
             board.setInitialState();
             endofgame = false;
         } else {
-
         }
-
         return endofgame;
     }
 
@@ -98,15 +85,12 @@ public class Game {
         boolean value = true;
         boolean endofgame = false;
 
-        activePlayer = playerA;  // JESLI METODA NIE JEST STATYCZNA UZYWAMY THIS LUB NIE MUSIMY SIE ODWOLYWAC POPRZEZ OBIEKTY 
-
+        activePlayer = playerA;  // JESLI METODA NIE JEST STATYCZNA UZYWAMY THIS LUB NIE MUSIMY SIE ODWOLYWAC POPRZEZ OBIEKTY
         String boardSizeInString = "";
         System.out.println("Wybierz wielkosc planszy M [3x3]  D [5x5] BD [7x7] GUMOKU [13x13]:");
         boardSizeInString = scanner.nextLine();
-
-        
-        board = BoardFactory.createBoard(boardSizeInString, this);//wskazanmie na obiekto w ktorym jestrem
-
+       
+        board = BoardFactory.createBoard(boardSizeInString, this);//wskazanmie na obiekto w ktorym jest
         rules = RulesFactory.createRules(boardSizeInString, board);
 
         //TODO: Tworzy nowa plansze ale nie wyswietla stanow;
@@ -118,7 +102,6 @@ public class Game {
         while (true) {
             System.out.println("kolejna tura:");
             board.displayState();
-
             if (rules.checkWin(Board.CROSS.getSymbol())) {
                 endofgame = true;
                 System.out.println("wygrywa X:");
@@ -126,57 +109,43 @@ public class Game {
             if (rules.checkWin(Board.CIRCLE.getSymbol())) {
                 endofgame = true;
                 System.out.println("wygrywa O:");
-
             }
 
             if (rules.checkDraw()) {
                 endofgame = true;
                 System.out.println("remis");
-
             }
 
             if (endofgame == true) {
                 endofgame = askAboutNewGame();
-
                 if (endofgame == true) {
                     break;
-
                 }
             }
 
             if (!endofgame) {
                 switchActivePlayer();
                 value = activePlayer.move(numerRuchu);
-
                 nextTurn(value);
             }
-
         }
-
     }
     
-    
-
     public int getNumerRuchu() {
         return numerRuchu;
     }
-
     public void setNumerRuchu(int numerRuchu) {
         this.numerRuchu = numerRuchu;
     }
-
     public Board getBoard() {
         return board;
     }
-
     public void setBoard(Board board) {
         this.board = board;
     }
-
     public Rules getRules() {
         return rules;
     }
-
     public void setRules(Rules rules) {
         this.rules = rules;
     }

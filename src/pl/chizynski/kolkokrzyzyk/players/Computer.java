@@ -1,5 +1,4 @@
 package pl.chizynski.kolkokrzyzyk.players;
-
 import pl.chizynski.kolkokrzyzyk.boards.Board;
 import pl.chizynski.kolkokrzyzyk.figures.FigureFactory;
 
@@ -11,7 +10,6 @@ public class Computer extends Player {
 
     @Override
     public boolean move(int turnNumber) {
-
         while (true) {
             int x = randomaise();
             int y = randomaise();
@@ -26,11 +24,9 @@ public class Computer extends Player {
             }
         }
         return true;
-        
     }
 
     public int randomaise() {
-
         int x = (int) Math.floor(Math.random() * this.getBoard().getFields().length);
         return x;
     }
