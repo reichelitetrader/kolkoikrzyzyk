@@ -72,6 +72,8 @@ class CustomActionListener implements ActionListener {
                 this.game.getBoard().getFields()[i][j] = Board.CIRCLE;
                 this.window.buttons[i][j].setText(String.valueOf(Board.CIRCLE.getSymbol()));
             }
+
+            this.game.nextTurn(true);
         } else {
             System.out.println("to pole jest zajete wybierz inne:");
         }
@@ -81,7 +83,6 @@ class CustomActionListener implements ActionListener {
         } else if (this.game.getRules().checkWin(Board.CIRCLE.getSymbol())) {
             System.out.println("wygrywa O:");
         }
-        this.game.nextTurn(true);
         this.game.getBoard().displayState();
     }
 }
