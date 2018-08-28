@@ -4,15 +4,18 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import pl.chizynski.kolkokrzyzyk.boards.Board;
 import pl.chizynski.kolkokrzyzyk.figures.Figure;
 
+
 public class Window extends JFrame {
 
     private Game game = null;
     JButton[][] buttons = new JButton[3][3];
+    
 
     public Window(Game game) {
         this.game = game;
@@ -82,10 +85,10 @@ class CustomActionListener implements ActionListener {
         }
 
         if (this.game.checkWin(Board.CROSS.getSymbol())) {
-            System.out.println("wygrywa X:");
+            JOptionPane.showMessageDialog(null,"wygrywa X:");
 
         } else if (this.game.checkWin(Board.CIRCLE.getSymbol())) {
-            System.out.println("wygrywa O:");
+           JOptionPane.showMessageDialog(null,"wygrywa O:");
         }
         
         this.game.getBoard().displayState();
