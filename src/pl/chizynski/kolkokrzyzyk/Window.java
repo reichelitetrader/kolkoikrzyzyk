@@ -64,7 +64,8 @@ class CustomActionListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         Board board = this.game.getBoard();
         Figure[][] fields = board.getFields();
-        if (Board.EMPTY == this.game.getBoard().getFields()[i][j]) {
+        if (Board.EMPTY == this.game.getBoard().getFields()[i][j] && !this.game.getEndOfGame()) {
+              
             if (this.game.getNumerRuchu() % 2 != 0) {
                 this.game.getBoard().getFields()[i][j] = Board.CROSS;
                 this.window.buttons[i][j].setText(String.valueOf(Board.CROSS.getSymbol()));
@@ -74,15 +75,20 @@ class CustomActionListener implements ActionListener {
             }
 
             this.game.nextTurn(true);
+          
+
         } else {
             System.out.println("to pole jest zajete wybierz inne:");
         }
 
-        if (this.game.getRules().checkWin(Board.CROSS.getSymbol())) {
+        if (this.game.checkWin(Board.CROSS.getSymbol())) {
             System.out.println("wygrywa X:");
-        } else if (this.game.getRules().checkWin(Board.CIRCLE.getSymbol())) {
+
+        } else if (this.game.checkWin(Board.CIRCLE.getSymbol())) {
             System.out.println("wygrywa O:");
         }
+        
         this.game.getBoard().displayState();
+       
     }
 }

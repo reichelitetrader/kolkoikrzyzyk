@@ -17,9 +17,12 @@ public class Game {
     private char figure = 0;
     private static Scanner scanner = new Scanner(System.in);
     private Window window = null;
+    private boolean endofgame;
+    
 
     public Game() {
         this.window = new Window(this);
+       
     }
     public static void main(String[] args) {
         Game game = new Game();
@@ -66,7 +69,7 @@ public class Game {
 
     public boolean askAboutNewGame() {
         String T = "";
-        boolean endofgame = true;
+        
         System.out.println("czy chcesz rozpoczac nowa gre? [T/n]");
         T = scanner.nextLine();
 
@@ -84,7 +87,7 @@ public class Game {
         int wiersz = 0;
         int kolumna = 0;
         boolean value = true;
-        boolean endofgame = false;
+        
 
         activePlayer = playerA;  // JESLI METODA NIE JEST STATYCZNA UZYWAMY THIS LUB NIE MUSIMY SIE ODWOLYWAC POPRZEZ OBIEKTY
         String boardSizeInString = "";
@@ -129,10 +132,16 @@ public class Game {
             if (!endofgame) {
                 switchActivePlayer();
                 value = activePlayer.move(numerRuchu);
+                
                 nextTurn(value);
             }
         }
     }
+    
+     public boolean checkWin(char znak) {
+         this.endofgame = this.rules.checkWin(znak);
+         return this.endofgame;
+     }
     
     public int getNumerRuchu() {
         return numerRuchu;
@@ -151,5 +160,8 @@ public class Game {
     }
     public void setRules(Rules rules) {
         this.rules = rules;
+    }
+    public boolean getEndOfGame(){
+        return endofgame;
     }
 }
