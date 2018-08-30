@@ -1,4 +1,5 @@
 package pl.chizynski.kolkokrzyzyk;
+
 import java.util.Scanner;
 import pl.chizynski.kolkokrzyzyk.boards.Board;
 import pl.chizynski.kolkokrzyzyk.boards.BoardFactory;
@@ -8,6 +9,7 @@ import pl.chizynski.kolkokrzyzyk.rules.Rules;
 import pl.chizynski.kolkokrzyzyk.rules.RulesFactory;
 
 public class Game {
+
     private int numerRuchu = 1;
     private Board board = null;
     private Rules rules = null;
@@ -18,16 +20,17 @@ public class Game {
     private static Scanner scanner = new Scanner(System.in);
     private Window window = null;
     private boolean endofgame;
-    
 
     public Game() {
         this.window = new Window(this);
-       
+
     }
+
     public static void main(String[] args) {
         Game game = new Game();
         game.startGame();
     }
+
     public char whoStarts() {
         String wybor = "";
         wybor = scanner.nextLine();
@@ -60,7 +63,7 @@ public class Game {
 
     public void nextTurn(boolean value) {
         if (value == true) {
-            
+
             numerRuchu++;
         } else {
             System.out.println("brak zwiekszania tury:");
@@ -69,45 +72,48 @@ public class Game {
 
     public boolean askAboutNewGame() {
         String T = "";
-        
+
         System.out.println("czy chcesz rozpoczac nowa gre? [T/n]");
         T = scanner.nextLine();
 
         if (T.equals("T")) {
-            activePlayer = playerA;
-            numerRuchu = 0;
-            board.setInitialState();
-            endofgame = false;
+          this.newGame();
         } else {
         }
         return endofgame;
+    }
+
+    public void newGame() {
+        activePlayer = playerA;
+        numerRuchu = 0;
+        board.setInitialState();
+        endofgame = false;
     }
 
     public void startGame() {
         int wiersz = 0;
         int kolumna = 0;
         boolean value = true;
-        
 
         activePlayer = playerA;  // JESLI METODA NIE JEST STATYCZNA UZYWAMY THIS LUB NIE MUSIMY SIE ODWOLYWAC POPRZEZ OBIEKTY
         String boardSizeInString = "";
         System.out.println("Wybierz wielkosc planszy M [3x3]  D [5x5] BD [7x7] GUMOKU [13x13]:");
         boardSizeInString = scanner.nextLine();
-       
+
         board = BoardFactory.createBoard(boardSizeInString, this);//wskazanmie na obiekto w ktorym jest
         rules = RulesFactory.createRules(boardSizeInString, board);
 
         //TODO: Tworzy nowa plansze ale nie wyswietla stanow;
         System.out.println("wybierz kto zaczyna?:");
         figure = whoStarts();
-        
+
         playerA = createPlayer("wybor gracza1 [K/C]:");
         playerB = createPlayer("wybor gracza2 [K/C]:");
 
         while (true) {
             System.out.println("kolejna tura:");
             board.displayState();
-            
+
             if (rules.checkWin(Board.CROSS.getSymbol())) {
                 endofgame = true;
                 System.out.println("wygrywa X:");
@@ -132,36 +138,42 @@ public class Game {
             if (!endofgame) {
                 switchActivePlayer();
                 value = activePlayer.move(numerRuchu);
-                
+
                 nextTurn(value);
             }
         }
     }
-    
-     public boolean checkWin(char znak) {
-         this.endofgame = this.rules.checkWin(znak);
-         return this.endofgame;
-     }
-    
+
+    public boolean checkWin(char znak) {
+        this.endofgame = this.rules.checkWin(znak);
+        return this.endofgame;
+    }
+
     public int getNumerRuchu() {
         return numerRuchu;
     }
+
     public void setNumerRuchu(int numerRuchu) {
         this.numerRuchu = numerRuchu;
     }
+
     public Board getBoard() {
         return board;
     }
+
     public void setBoard(Board board) {
         this.board = board;
     }
+
     public Rules getRules() {
         return rules;
     }
+
     public void setRules(Rules rules) {
         this.rules = rules;
     }
-    public boolean getEndOfGame(){
+
+    public boolean getEndOfGame() {
         return endofgame;
     }
 }
