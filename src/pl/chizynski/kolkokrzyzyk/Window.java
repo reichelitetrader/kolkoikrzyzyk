@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JFrame;
-import static javax.swing.JOptionPane.YES_OPTION;
 import javax.swing.JPanel;
 import pl.chizynski.kolkokrzyzyk.boards.Board;
 import pl.chizynski.kolkokrzyzyk.figures.Figure;
@@ -44,6 +43,16 @@ public class Window extends JFrame {
             frame.getContentPane().add(compsToExperiment);
             frame.setVisible(true);// pokazanie okna 
             frame.pack(); //spakowanie okna 
+
+        }
+
+    }
+
+    public void clearButtons() {
+        for (int i = 0; i < this.buttons.length; i++) {
+            for (int j = 0; j < this.buttons.length; j++) {
+                this.buttons[i][j].setText(" ");
+            }
         }
     }
 }
@@ -85,12 +94,8 @@ class CustomActionListener implements ActionListener {
         if (this.game.checkWin(Board.CROSS.getSymbol())) {
             JOptionPane.showMessageDialog(null, "wygrywa X:");
             int result = JOptionPane.showConfirmDialog(window, "czy chcesz rozpoczac nowa gre?");
-            if (result == JOptionPane.YES_OPTION ){
-               for(int i=0; i<this.window.buttons.length ;i++){
-                   for(j=0; j<this.window.buttons.length;j++){
-                      this.window.buttons[i][j].setText(" ");
-                   }
-               }
+            if (result == JOptionPane.YES_OPTION) {
+                this.window.clearButtons();
                 this.game.newGame();
 
             }
