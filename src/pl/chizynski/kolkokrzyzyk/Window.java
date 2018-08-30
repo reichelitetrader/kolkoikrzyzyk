@@ -11,12 +11,10 @@ import javax.swing.JPanel;
 import pl.chizynski.kolkokrzyzyk.boards.Board;
 import pl.chizynski.kolkokrzyzyk.figures.Figure;
 
-
 public class Window extends JFrame {
 
     private Game game = null;
     JButton[][] buttons = new JButton[3][3];
-    
 
     public Window(Game game) {
         this.game = game;
@@ -69,8 +67,8 @@ class CustomActionListener implements ActionListener {
         Board board = this.game.getBoard();
         Figure[][] fields = board.getFields();
         if (Board.EMPTY == this.game.getBoard().getFields()[i][j] && !this.game.getEndOfGame()) {
-              
-                              if (this.game.getNumerRuchu() % 2 != 0) {
+
+            if (this.game.getNumerRuchu() % 2 != 0) {
                 this.game.getBoard().getFields()[i][j] = Board.CROSS;
                 this.window.buttons[i][j].setText(String.valueOf(Board.CROSS.getSymbol()));
             } else if (this.game.getNumerRuchu() % 2 == 0) {
@@ -79,26 +77,29 @@ class CustomActionListener implements ActionListener {
             }
 
             this.game.nextTurn(true);
-          
 
         } else {
             System.out.println("to pole jest zajete wybierz inne:");
         }
 
         if (this.game.checkWin(Board.CROSS.getSymbol())) {
-            JOptionPane.showMessageDialog(null,"wygrywa X:");
-                      int result = JOptionPane.showConfirmDialog(window,"czy chcesz rozpoczac nowa gre?");
-                 if(result  == JOptionPane.YES_OPTION){
-                     
-                     
-           
-                 }
-                      
+            JOptionPane.showMessageDialog(null, "wygrywa X:");
+            int result = JOptionPane.showConfirmDialog(window, "czy chcesz rozpoczac nowa gre?");
+            if (result == JOptionPane.YES_OPTION ){
+               for(int i=0; i<this.window.buttons.length ;i++){
+                   for(j=0; j<this.window.buttons.length;j++){
+                      this.window.buttons[i][j].setText(" ");
+                   }
+               }
+                this.game.newGame();
+
+            }
+
         } else if (this.game.checkWin(Board.CIRCLE.getSymbol())) {
-           JOptionPane.showMessageDialog(null,"wygrywa O:");
+            JOptionPane.showMessageDialog(null, "wygrywa O:");
         }
-        
+
         this.game.getBoard().displayState();
-       
+
     }
 }
