@@ -17,7 +17,9 @@ public class Window extends JFrame {
 
     public Window(Game game) {
         this.game = game;
+
         JFrame frame = this; //new JFrame("test"); //utworzenie okna ramowego z tytułem 
+
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         GridLayout experimentLayout = new GridLayout(0, 1); //ilosc wierszy i kolumn
         this.setLayout(experimentLayout);
@@ -29,6 +31,7 @@ public class Window extends JFrame {
             for (int j = 0; j < buttons[i].length; j++) {
                 buttons[i][j] = new JButton(" ");
                 buttons[i][j].setText(" ");
+                buttons[i][j].setSize(400, 200);
                 compsToExperiment.add(buttons[i][j]);
                 buttons[i][j].addActionListener(new CustomActionListener(game, this, i, j));
             }
@@ -43,7 +46,7 @@ public class Window extends JFrame {
             frame.getContentPane().add(compsToExperiment);
             frame.setVisible(true);// pokazanie okna 
             frame.pack(); //spakowanie okna 
-
+            frame.setSize(800, 700);
         }
 
     }
@@ -94,7 +97,7 @@ class CustomActionListener implements ActionListener {
         if (this.game.checkWin(Board.CROSS.getSymbol())) {
             JOptionPane.showMessageDialog(null, "wygrywa X:");
             int result = JOptionPane.showConfirmDialog(window, "czy chcesz rozpoczac nowa gre?");
-            
+
             switch (result) {
                 case JOptionPane.YES_OPTION:
                     this.window.clearButtons();
@@ -103,7 +106,7 @@ class CustomActionListener implements ActionListener {
                 case JOptionPane.NO_OPTION:
                     System.exit(0);
                     break;
-                    
+
                 //default:  else
             }
 
