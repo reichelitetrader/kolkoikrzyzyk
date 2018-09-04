@@ -94,12 +94,17 @@ class CustomActionListener implements ActionListener {
         if (this.game.checkWin(Board.CROSS.getSymbol())) {
             JOptionPane.showMessageDialog(null, "wygrywa X:");
             int result = JOptionPane.showConfirmDialog(window, "czy chcesz rozpoczac nowa gre?");
-            if (result == JOptionPane.YES_OPTION ) {
-                this.window.clearButtons();
-                this.game.newGame();
-            } else if (result == JOptionPane.NO_OPTION){
-                System.exit(0);
-           
+            
+            switch (result) {
+                case JOptionPane.YES_OPTION:
+                    this.window.clearButtons();
+                    this.game.newGame();
+                    break;
+                case JOptionPane.NO_OPTION:
+                    System.exit(0);
+                    break;
+                    
+                //default:  else
             }
 
         } else if (this.game.checkWin(Board.CIRCLE.getSymbol())) {
