@@ -81,8 +81,10 @@ class CustomActionListener implements ActionListener {
         if (Board.EMPTY == this.game.getBoard().getFields()[i][j] && !this.game.getEndOfGame()) {
 
             if (this.game.getNumerRuchu() % 2 != 0) {
+
                 this.game.getBoard().getFields()[i][j] = Board.CROSS;
                 this.window.buttons[i][j].setText(String.valueOf(Board.CROSS.getSymbol()));
+
             } else if (this.game.getNumerRuchu() % 2 == 0) {
                 this.game.getBoard().getFields()[i][j] = Board.CIRCLE;
                 this.window.buttons[i][j].setText(String.valueOf(Board.CIRCLE.getSymbol()));
@@ -93,7 +95,8 @@ class CustomActionListener implements ActionListener {
         } else {
             System.out.println("to pole jest zajete wybierz inne:");
         }
-
+        System.out.println("jestem przyciskiem i poczulem sie dotkniety:" + i + " " + j);
+        
         if (this.game.checkWin(Board.CROSS.getSymbol())) {
             JOptionPane.showMessageDialog(null, "wygrywa X:");
             int result = JOptionPane.showConfirmDialog(window, "czy chcesz rozpoczac nowa gre?");
