@@ -97,7 +97,9 @@ class CustomActionListener implements ActionListener {
             if (result == JOptionPane.YES_OPTION) {
                 this.window.clearButtons();
                 this.game.newGame();
-
+            } 
+            if (result == JOptionPane.NO_OPTION){
+                System.exit(0);
             }
 
         } else if (this.game.checkWin(Board.CIRCLE.getSymbol())) {

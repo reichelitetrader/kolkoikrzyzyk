@@ -89,6 +89,7 @@ public class Game {
         board.setInitialState();
         endofgame = false;
     }
+   
 
     public void startGame() {
         int wiersz = 0;
