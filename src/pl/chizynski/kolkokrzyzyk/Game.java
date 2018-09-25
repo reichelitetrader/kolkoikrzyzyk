@@ -3,6 +3,7 @@ package pl.chizynski.kolkokrzyzyk;
 import java.util.Scanner;
 import pl.chizynski.kolkokrzyzyk.boards.Board;
 import pl.chizynski.kolkokrzyzyk.boards.BoardFactory;
+import pl.chizynski.kolkokrzyzyk.players.Computer;
 import pl.chizynski.kolkokrzyzyk.players.PlayerFactory;
 import pl.chizynski.kolkokrzyzyk.players.Player;
 import pl.chizynski.kolkokrzyzyk.rules.Rules;
@@ -87,6 +88,12 @@ public class Game {
         turnNumber = 0;
         board.setInitialState();
         endofgame = false;
+    }
+    
+    public boolean checkIfComputerStart(){
+        //return new String () instanceof String;  //sprawdzenie czy jest Stringiem
+        return playerA  instanceof Computer || playerB instanceof Computer;
+        
     }
    
 
@@ -176,4 +183,7 @@ public class Game {
     public boolean getEndOfGame() {
         return endofgame;
     }
+    
+    
+    
 }

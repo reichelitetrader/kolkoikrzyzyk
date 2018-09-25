@@ -59,17 +59,17 @@ public class Window extends JFrame {
             }
         }
     }
-    
-    public void refreshDisplayState(){
-        
-        for(int i=0; i<this.game.getBoard().getFields().length; i++){
-            for(int j=0; j<this.game.getBoard().getFields().length;j++){
+
+    public void refreshDisplayState() {
+
+        for (int i = 0; i < this.game.getBoard().getFields().length; i++) {
+            for (int j = 0; j < this.game.getBoard().getFields().length; j++) {
                 String value = Character.toString(this.game.getBoard().getFields()[i][j].getSymbol());
-               buttons[i][j].setText(value);
-               
+                buttons[i][j].setText(value);
+
             }
         }
-        
+
     }
 }
 
@@ -95,16 +95,20 @@ class CustomActionListener implements ActionListener {
         if (Board.EMPTY == this.game.getBoard().getFields()[i][j] && !this.game.getEndOfGame()) {
 
             if (this.game.getTurnNumber() % 2 != 0) {
-                
+
                 this.game.getBoard().getFields()[i][j] = Board.CROSS;
-             //   this.window.buttons[i][j].setText(String.valueOf(Board.CROSS.getSymbol()));
+                //   this.window.buttons[i][j].setText(String.valueOf(Board.CROSS.getSymbol()));
 
             } else if (this.game.getTurnNumber() % 2 == 0) {
                 this.game.getBoard().getFields()[i][j] = Board.CIRCLE;
                 //this.window.buttons[i][j].setText(String.valueOf(Board.CIRCLE.getSymbol()));
             }
-            this.game.nextTurn(true);
-            computer.move(this.game.getTurnNumber());
+
+            if (this.game.checkIfComputerStart()) {
+                this.game.nextTurn(true);
+                computer.move(this.game.getTurnNumber());
+
+            }
             this.window.refreshDisplayState();
             this.game.nextTurn(true);
 
@@ -112,7 +116,7 @@ class CustomActionListener implements ActionListener {
             System.out.println("to pole jest zajete wybierz inne:");
         }
         System.out.println("jestem przyciskiem i poczulem sie dotkniety:" + i + " " + j);
-        
+
         if (this.game.checkWin(Board.CROSS.getSymbol())) {
             JOptionPane.showMessageDialog(null, "wygrywa X:");
             int result = JOptionPane.showConfirmDialog(window, "czy chcesz rozpoczac nowa gre?");
