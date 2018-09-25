@@ -9,8 +9,7 @@ import pl.chizynski.kolkokrzyzyk.rules.Rules;
 import pl.chizynski.kolkokrzyzyk.rules.RulesFactory;
 
 public class Game {
-
-    private int numerRuchu = 1;
+    private int turnNumber = 1;
     private Board board = null;
     private Rules rules = null;
     private Player playerA;
@@ -54,7 +53,7 @@ public class Game {
     }
 
     public void switchActivePlayer() {
-        if (numerRuchu % 2 != 0) {
+        if (turnNumber % 2 != 0) {
             activePlayer = playerA;
         } else {
             activePlayer = playerB;
@@ -64,7 +63,7 @@ public class Game {
     public void nextTurn(boolean value) {
         if (value == true) {
 
-            numerRuchu++;
+            turnNumber++;
         } else {
             System.out.println("brak zwiekszania tury:");
         }
@@ -85,7 +84,7 @@ public class Game {
 
     public void newGame() {
         activePlayer = playerA;
-        numerRuchu = 0;
+        turnNumber = 0;
         board.setInitialState();
         endofgame = false;
     }
@@ -138,7 +137,7 @@ public class Game {
 
             if (!endofgame) {
                 switchActivePlayer();
-                value = activePlayer.move(numerRuchu);
+                value = activePlayer.move(turnNumber);
 
                 nextTurn(value);
             }
@@ -150,12 +149,12 @@ public class Game {
         return this.endofgame;
     }
 
-    public int getNumerRuchu() {
-        return numerRuchu;
+    public int getTurnNumber() {
+        return turnNumber;
     }
 
-    public void setNumerRuchu(int numerRuchu) {
-        this.numerRuchu = numerRuchu;
+    public void setTurnNumber(int turnNumber) {
+        this.turnNumber = turnNumber;
     }
 
     public Board getBoard() {

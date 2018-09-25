@@ -94,7 +94,7 @@ public class Rules {
     //@return zwraca wynik jesli wygra CROSS czy CIRCLE to true jesli nie false
 
     public boolean checkDraw() {
-        return board.getGame().getNumerRuchu()  == getMaxNumberMoves()
+        return board.getGame().getTurnNumber()  == getMaxNumberMoves()
                 && !checkWin(Board.CIRCLE.getSymbol()) 
                 && !checkWin(Board.CROSS.getSymbol());
     }

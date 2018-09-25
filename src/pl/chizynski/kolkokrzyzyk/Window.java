@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import pl.chizynski.kolkokrzyzyk.boards.Board;
 import pl.chizynski.kolkokrzyzyk.figures.Figure;
+import pl.chizynski.kolkokrzyzyk.players.Computer;
 
 public class Window extends JFrame {
 
@@ -58,6 +59,18 @@ public class Window extends JFrame {
             }
         }
     }
+    
+    public void refreshDisplayState(){
+        
+        for(int i=0; i<this.game.getBoard().getFields().length; i++){
+            for(int j=0; j<this.game.getBoard().getFields().length;j++){
+                String value = Character.toString(this.game.getBoard().getFields()[i][j].getSymbol());
+               buttons[i][j].setText(value);
+               
+            }
+        }
+        
+    }
 }
 
 class CustomActionListener implements ActionListener {
@@ -78,18 +91,21 @@ class CustomActionListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         Board board = this.game.getBoard();
         Figure[][] fields = board.getFields();
+        Computer computer = new Computer(board);
         if (Board.EMPTY == this.game.getBoard().getFields()[i][j] && !this.game.getEndOfGame()) {
 
-            if (this.game.getNumerRuchu() % 2 != 0) {
-
+            if (this.game.getTurnNumber() % 2 != 0) {
+                
                 this.game.getBoard().getFields()[i][j] = Board.CROSS;
-                this.window.buttons[i][j].setText(String.valueOf(Board.CROSS.getSymbol()));
+             //   this.window.buttons[i][j].setText(String.valueOf(Board.CROSS.getSymbol()));
 
-            } else if (this.game.getNumerRuchu() % 2 == 0) {
+            } else if (this.game.getTurnNumber() % 2 == 0) {
                 this.game.getBoard().getFields()[i][j] = Board.CIRCLE;
-                this.window.buttons[i][j].setText(String.valueOf(Board.CIRCLE.getSymbol()));
+                //this.window.buttons[i][j].setText(String.valueOf(Board.CIRCLE.getSymbol()));
             }
-
+            this.game.nextTurn(true);
+            computer.move(this.game.getTurnNumber());
+            this.window.refreshDisplayState();
             this.game.nextTurn(true);
 
         } else {
