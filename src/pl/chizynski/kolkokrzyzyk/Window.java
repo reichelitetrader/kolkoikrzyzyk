@@ -47,7 +47,7 @@ public class Window extends JFrame {
             frame.getContentPane().add(compsToExperiment);
             frame.setVisible(true);// pokazanie okna 
             frame.pack(); //spakowanie okna 
-            frame.setSize(800, 700);
+            frame.setSize(600, 400);
         }
 
     }
@@ -97,7 +97,7 @@ class CustomActionListener implements ActionListener {
             if (this.game.getTurnNumber() % 2 != 0) {
 
                 this.game.getBoard().getFields()[i][j] = Board.CROSS;
-                //   this.window.buttons[i][j].setText(String.valueOf(Board.CROSS.getSymbol()));
+                //this.window.buttons[i][j].setText(String.valueOf(Board.CROSS.getSymbol()));
 
             } else if (this.game.getTurnNumber() % 2 == 0) {
                 this.game.getBoard().getFields()[i][j] = Board.CIRCLE;
@@ -107,7 +107,6 @@ class CustomActionListener implements ActionListener {
             if (this.game.checkIfComputerStart()) {
                 this.game.nextTurn(true);
                 computer.move(this.game.getTurnNumber());
-
             }
             this.window.refreshDisplayState();
             this.game.nextTurn(true);

@@ -68,6 +68,7 @@ public class Game {
         } else {
             System.out.println("brak zwiekszania tury:");
         }
+        this.window.refreshDisplayState();
     }
 
     public boolean askAboutNewGame() {
