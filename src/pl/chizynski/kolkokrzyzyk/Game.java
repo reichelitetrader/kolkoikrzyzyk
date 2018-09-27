@@ -91,10 +91,14 @@ public class Game {
         endofgame = false;
     }
     
-    public boolean checkIfComputerStart(){
+    public boolean checkIfOnePlayerIsComputer(){
         //return new String () instanceof String;  //sprawdzenie czy jest Stringiem
         return playerA  instanceof Computer || playerB instanceof Computer;
         
+    }
+    
+    public boolean checkIfTwoPlayerAreComputer(){
+        return playerA instanceof Computer && playerB instanceof Computer;
     }
    
 
@@ -118,9 +122,19 @@ public class Game {
         playerA = createPlayer("wybor gracza1 [K/C]:");
         playerB = createPlayer("wybor gracza2 [K/C]:");
 
+         
+       if(this.checkIfTwoPlayerAreComputer()){
+           for(int i = 0; i < this.window.buttons.length; i++){
+               for( int j=0; j< this.window.buttons.length;j++){
+                   this.window.buttons[i][j].setEnabled(false);
+               }
+           }
+       }
+        
         while (true) {
             System.out.println("kolejna tura:");
             board.displayState();
+            
 
             if (rules.checkWin(Board.CROSS.getSymbol())) {
                 endofgame = true;

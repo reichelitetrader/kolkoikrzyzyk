@@ -104,7 +104,7 @@ class CustomActionListener implements ActionListener {
                 //this.window.buttons[i][j].setText(String.valueOf(Board.CIRCLE.getSymbol()));
             }
 
-            if (this.game.checkIfComputerStart()) {
+            if (this.game.checkIfOnePlayerIsComputer()) {
                 this.game.nextTurn(true);
                 computer.move(this.game.getTurnNumber());
             }
