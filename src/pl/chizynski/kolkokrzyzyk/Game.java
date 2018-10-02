@@ -124,11 +124,7 @@ public class Game {
 
          
        if(this.checkIfTwoPlayerAreComputer()){
-           for(int i = 0; i < this.window.buttons.length; i++){
-               for( int j=0; j< this.window.buttons.length;j++){
-                   this.window.buttons[i][j].setEnabled(false);
-               }
-           }
+          this.window.blockButtons();
        }
         
         while (true) {

@@ -4,6 +4,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -11,21 +12,33 @@ import pl.chizynski.kolkokrzyzyk.boards.Board;
 import pl.chizynski.kolkokrzyzyk.figures.Figure;
 import pl.chizynski.kolkokrzyzyk.players.Computer;
 
-public class Window extends JFrame {
-
-    private Game game = null;
+public class Window extends JFrame { 
+    String playerTypes[] = {"Computer" , "Human" };
+    String playerVersus[] = {"Human" , "Computer"};
+ 
+    JComboBox playerTypesCombo;
+    JComboBox playerVersusCombo;
+    
+    
+    private Game game = null; 
     JButton[][] buttons = new JButton[3][3];
+    
 
     public Window(Game game) {
         this.game = game;
-
+    
+        this.playerTypesCombo = new JComboBox (playerTypes); 
+        this.playerVersusCombo = new JComboBox(playerVersus);
         JFrame frame = this; //new JFrame("test"); //utworzenie okna ramowego z tytułem 
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         GridLayout experimentLayout = new GridLayout(0, 1); //ilosc wierszy i kolumn
         this.setLayout(experimentLayout);
         final JPanel compsToExperiment = new JPanel();
-        compsToExperiment.setLayout(new GridLayout(3, 3));
+        compsToExperiment.setLayout(new GridLayout(4, 3));
+        compsToExperiment.add(playerTypesCombo );
+        compsToExperiment.add( playerVersusCombo );
+        compsToExperiment.add( new JButton ("start") );
         JPanel controls = new JPanel();
 
         for (int i = 0; i < buttons.length; i++) {
@@ -36,18 +49,12 @@ public class Window extends JFrame {
                 compsToExperiment.add(buttons[i][j]);
                 buttons[i][j].addActionListener(new CustomActionListener(game, this, i, j));
             }
-//        button1.addActionListener(new ActionListener(){ //klasa anomimowa,
-//            //jesli interfejs ma 1 metode to interfejs funkcyjny ze mozna go uzywac w programowaniu funkcyjnym
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                System.out.println("test");
-//            }
-//        });
-            //button1.addActionListener((e) -> {     //lambda funkcja anonimowa do interfejsu funkcyjnego
             frame.getContentPane().add(compsToExperiment);
             frame.setVisible(true);// pokazanie okna 
             frame.pack(); //spakowanie okna 
             frame.setSize(600, 400);
+           
+            
         }
 
     }
@@ -70,6 +77,14 @@ public class Window extends JFrame {
             }
         }
 
+    }
+    
+    public void blockButtons(){
+        for(int i = 0; i < this.buttons.length; i++){
+               for( int j=0; j< this.buttons.length;j++){
+                   this.buttons[i][j].setEnabled(false);
+               }
+           }
     }
 }
 
