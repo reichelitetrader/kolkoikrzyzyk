@@ -22,11 +22,11 @@ public class Window extends JFrame {
     
     private Game game = null; 
     JButton[][] buttons = new JButton[3][3];
-    
+    JButton buttonName = new JButton();
 
     public Window(Game game) {
         this.game = game;
-    
+        this.buttonName = new JButton("Start");
         this.playerTypesCombo = new JComboBox (playerTypes); 
         this.playerVersusCombo = new JComboBox(playerVersus);
         JFrame frame = this; //new JFrame("test"); //utworzenie okna ramowego z tytułem 
@@ -38,7 +38,13 @@ public class Window extends JFrame {
         compsToExperiment.setLayout(new GridLayout(4, 3));
         compsToExperiment.add(playerTypesCombo );
         compsToExperiment.add( playerVersusCombo );
-        compsToExperiment.add( new JButton ("start") );
+        compsToExperiment.add(this.buttonName );
+        buttonName.addActionListener( new ActionListener(){ 
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               JOptionPane.showMessageDialog(null,"czesc jestem Piotr");
+            }
+        });
         JPanel controls = new JPanel();
 
         for (int i = 0; i < buttons.length; i++) {
@@ -107,10 +113,13 @@ class CustomActionListener implements ActionListener {
         Board board = this.game.getBoard();
         Figure[][] fields = board.getFields();
         Computer computer = new Computer(board);
+        
+        
+        
         if (Board.EMPTY == this.game.getBoard().getFields()[i][j] && !this.game.getEndOfGame()) {
 
             if (this.game.getTurnNumber() % 2 != 0) {
-
+                
                 this.game.getBoard().getFields()[i][j] = Board.CROSS;
                 //this.window.buttons[i][j].setText(String.valueOf(Board.CROSS.getSymbol()));
 
@@ -131,6 +140,7 @@ class CustomActionListener implements ActionListener {
         }
         System.out.println("jestem przyciskiem i poczulem sie dotkniety:" + i + " " + j);
 
+        
         if (this.game.checkWin(Board.CROSS.getSymbol())) {
             JOptionPane.showMessageDialog(null, "wygrywa X:");
             int result = JOptionPane.showConfirmDialog(window, "czy chcesz rozpoczac nowa gre?");
