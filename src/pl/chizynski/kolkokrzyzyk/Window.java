@@ -9,8 +9,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import pl.chizynski.kolkokrzyzyk.boards.Board;
+import pl.chizynski.kolkokrzyzyk.boards.BoardFactory;
 import pl.chizynski.kolkokrzyzyk.figures.Figure;
 import pl.chizynski.kolkokrzyzyk.players.Computer;
+import pl.chizynski.kolkokrzyzyk.rules.RulesFactory;
 
 public class Window extends JFrame {
 
@@ -42,7 +44,9 @@ public class Window extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(null, "bedzie gral " + playerTypesCombo.getSelectedItem() + " vs " + playerVersusCombo.getSelectedItem());
-
+                game.setBoard(BoardFactory.createBoard("M", game));
+                game.setRules(RulesFactory.createRules("M", game.getBoard()));
+                game.newGame();
             }
         });
         JPanel controls = new JPanel();

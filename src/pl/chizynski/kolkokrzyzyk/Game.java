@@ -23,6 +23,7 @@ public class Game {
 
     public Game() {
         this.window = new Window(this);
+        
     }
 
     public static void main(String[] args) {
@@ -189,4 +190,6 @@ public class Game {
     public boolean getEndOfGame() {
         return endofgame;
     }
+    
+   
 }

@@ -3,9 +3,10 @@ import pl.chizynski.kolkokrzyzyk.boards.Board;
 
 public class Rules {
     private Board board = null;
-
+        
     public Rules(Board board) {  //powiazac zeby rules wiedzialo na ktorym board pracowac
         this.board = board;
+        
     }
 
     public boolean checkWin(char znak) {
@@ -109,4 +110,6 @@ public class Rules {
     public void setBoard(Board board){
         this.board = board;
     }
+    
+ 
 }
