@@ -40,12 +40,14 @@ public class Window extends JFrame {
         compsToExperiment.add(playerTypesCombo);
         compsToExperiment.add(playerVersusCombo);
         compsToExperiment.add(this.buttonName);
+         
         buttonName.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(null, "bedzie gral " + playerTypesCombo.getSelectedItem() + " vs " + playerVersusCombo.getSelectedItem());
                 game.setBoard(BoardFactory.createBoard("M", game));
                 game.setRules(RulesFactory.createRules("M", game.getBoard()));
+                unblockButtons();
                 game.newGame();
             }
         });
@@ -59,11 +61,13 @@ public class Window extends JFrame {
                 compsToExperiment.add(buttons[i][j]);
                 buttons[i][j].addActionListener(new CustomActionListener(game, this, i, j));
             }
+            
             frame.getContentPane().add(compsToExperiment);
             frame.setVisible(true);// pokazanie okna 
             frame.pack(); //spakowanie okna 
             frame.setSize(600, 400);
         }
+        blockButtons();
     }
 
     public void clearButtons() {
@@ -90,8 +94,14 @@ public class Window extends JFrame {
             }
         }
     }
+    
+    public void unblockButtons(){
+         for (int i = 0; i < this.buttons.length; i++) {
+            for (int j = 0; j < this.buttons.length; j++) {
+                this.buttons[i][j].setEnabled(true);
+    }
 }
-
+    }
 class CustomActionListener implements ActionListener {
 
     private Game game = null;
@@ -155,4 +165,5 @@ class CustomActionListener implements ActionListener {
         }
         this.game.getBoard().displayState();
     }
+}
 }
