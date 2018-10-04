@@ -12,37 +12,37 @@ import pl.chizynski.kolkokrzyzyk.boards.Board;
 import pl.chizynski.kolkokrzyzyk.figures.Figure;
 import pl.chizynski.kolkokrzyzyk.players.Computer;
 
-public class Window extends JFrame { 
-    String playerTypes[] = {"Computer" , "Human" };
-    String playerVersus[] = {"Human" , "Computer"};
- 
+public class Window extends JFrame {
+
+    String playerTypes[] = {"Computer", "Human"};
+    String playerVersus[] = {"Human", "Computer"};
     JComboBox playerTypesCombo;
     JComboBox playerVersusCombo;
-    
-    
-    private Game game = null; 
+
+    private Game game = null;
     JButton[][] buttons = new JButton[3][3];
     JButton buttonName = new JButton();
 
     public Window(Game game) {
         this.game = game;
         this.buttonName = new JButton("Start");
-        this.playerTypesCombo = new JComboBox (playerTypes); 
+        this.playerTypesCombo = new JComboBox(playerTypes);
         this.playerVersusCombo = new JComboBox(playerVersus);
-        JFrame frame = this; //new JFrame("test"); //utworzenie okna ramowego z tytułem 
+        JFrame frame = this; //utworzenie okna ramowego z tytułem 
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         GridLayout experimentLayout = new GridLayout(0, 1); //ilosc wierszy i kolumn
         this.setLayout(experimentLayout);
         final JPanel compsToExperiment = new JPanel();
         compsToExperiment.setLayout(new GridLayout(4, 3));
-        compsToExperiment.add(playerTypesCombo );
-        compsToExperiment.add( playerVersusCombo );
-        compsToExperiment.add(this.buttonName );
-        buttonName.addActionListener( new ActionListener(){ 
+        compsToExperiment.add(playerTypesCombo);
+        compsToExperiment.add(playerVersusCombo);
+        compsToExperiment.add(this.buttonName);
+        buttonName.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               JOptionPane.showMessageDialog(null,"czesc jestem Piotr");
+                JOptionPane.showMessageDialog(null, "bedzie gral " + playerTypesCombo.getSelectedItem() + " vs " + playerVersusCombo.getSelectedItem());
+
             }
         });
         JPanel controls = new JPanel();
@@ -59,10 +59,7 @@ public class Window extends JFrame {
             frame.setVisible(true);// pokazanie okna 
             frame.pack(); //spakowanie okna 
             frame.setSize(600, 400);
-           
-            
         }
-
     }
 
     public void clearButtons() {
@@ -74,23 +71,20 @@ public class Window extends JFrame {
     }
 
     public void refreshDisplayState() {
-
         for (int i = 0; i < this.game.getBoard().getFields().length; i++) {
             for (int j = 0; j < this.game.getBoard().getFields().length; j++) {
                 String value = Character.toString(this.game.getBoard().getFields()[i][j].getSymbol());
                 buttons[i][j].setText(value);
-
             }
         }
-
     }
-    
-    public void blockButtons(){
-        for(int i = 0; i < this.buttons.length; i++){
-               for( int j=0; j< this.buttons.length;j++){
-                   this.buttons[i][j].setEnabled(false);
-               }
-           }
+
+    public void blockButtons() {
+        for (int i = 0; i < this.buttons.length; i++) {
+            for (int j = 0; j < this.buttons.length; j++) {
+                this.buttons[i][j].setEnabled(false);
+            }
+        }
     }
 }
 
@@ -113,13 +107,10 @@ class CustomActionListener implements ActionListener {
         Board board = this.game.getBoard();
         Figure[][] fields = board.getFields();
         Computer computer = new Computer(board);
-        
-        
-        
-        if (Board.EMPTY == this.game.getBoard().getFields()[i][j] && !this.game.getEndOfGame()) {
 
+        if (Board.EMPTY == this.game.getBoard().getFields()[i][j] && !this.game.getEndOfGame()) {
             if (this.game.getTurnNumber() % 2 != 0) {
-                
+
                 this.game.getBoard().getFields()[i][j] = Board.CROSS;
                 //this.window.buttons[i][j].setText(String.valueOf(Board.CROSS.getSymbol()));
 
@@ -140,7 +131,6 @@ class CustomActionListener implements ActionListener {
         }
         System.out.println("jestem przyciskiem i poczulem sie dotkniety:" + i + " " + j);
 
-        
         if (this.game.checkWin(Board.CROSS.getSymbol())) {
             JOptionPane.showMessageDialog(null, "wygrywa X:");
             int result = JOptionPane.showConfirmDialog(window, "czy chcesz rozpoczac nowa gre?");
@@ -153,15 +143,12 @@ class CustomActionListener implements ActionListener {
                 case JOptionPane.NO_OPTION:
                     System.exit(0);
                     break;
-
                 //default:  else
             }
 
         } else if (this.game.checkWin(Board.CIRCLE.getSymbol())) {
             JOptionPane.showMessageDialog(null, "wygrywa O:");
         }
-
         this.game.getBoard().displayState();
-
     }
 }

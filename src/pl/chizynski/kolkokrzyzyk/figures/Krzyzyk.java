@@ -4,5 +4,4 @@ public class Krzyzyk extends Figure {
     public Krzyzyk(){
        this.setSymbol('X');
     }
-  
 }

@@ -7,9 +7,6 @@ public class Figure {
         return symbol;
     }
 
-    /**
-     * @param symbol the symbol to set
-     */
     public void setSymbol(char symbol) {
         this.symbol = symbol;
     }

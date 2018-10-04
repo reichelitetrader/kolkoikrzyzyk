@@ -1,6 +1,5 @@
 package pl.chizynski.kolkokrzyzyk.players;
 import pl.chizynski.kolkokrzyzyk.boards.Board;
-import pl.chizynski.kolkokrzyzyk.figures.FigureFactory;
 
 public class Computer extends Player {
 

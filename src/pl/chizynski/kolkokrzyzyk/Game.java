@@ -23,7 +23,6 @@ public class Game {
 
     public Game() {
         this.window = new Window(this);
-
     }
 
     public static void main(String[] args) {
@@ -94,14 +93,12 @@ public class Game {
     public boolean checkIfOnePlayerIsComputer(){
         //return new String () instanceof String;  //sprawdzenie czy jest Stringiem
         return playerA  instanceof Computer || playerB instanceof Computer;
-        
     }
     
     public boolean checkIfTwoPlayerAreComputer(){
         return playerA instanceof Computer && playerB instanceof Computer;
     }
    
-
     public void startGame() {
         int wiersz = 0;
         int kolumna = 0;
@@ -121,8 +118,7 @@ public class Game {
 
         playerA = createPlayer("wybor gracza1 [K/C]:");
         playerB = createPlayer("wybor gracza2 [K/C]:");
-
-         
+        
        if(this.checkIfTwoPlayerAreComputer()){
           this.window.blockButtons();
        }
@@ -131,7 +127,6 @@ public class Game {
             System.out.println("kolejna tura:");
             board.displayState();
             
-
             if (rules.checkWin(Board.CROSS.getSymbol())) {
                 endofgame = true;
                 System.out.println("wygrywa X:");
@@ -194,7 +189,4 @@ public class Game {
     public boolean getEndOfGame() {
         return endofgame;
     }
-    
-    
-    
 }
