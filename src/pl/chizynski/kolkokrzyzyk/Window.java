@@ -48,6 +48,8 @@ public class Window extends JFrame {
                 game.setBoard(BoardFactory.createBoard("M", game));
                 game.setRules(RulesFactory.createRules("M", game.getBoard()));
                 unblockButtons();
+                game.getBoard().setInitialState();
+                refreshDisplayState();
                 game.newGame();
             }
         });
